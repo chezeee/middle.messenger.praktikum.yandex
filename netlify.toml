@@ -9,3 +9,8 @@
 [build]
   command = "npm run build"
   publish = "dist"
+  
+[[redirects]]
+  from = "/*"
+  to = "/indes.html"
+  status = 200
