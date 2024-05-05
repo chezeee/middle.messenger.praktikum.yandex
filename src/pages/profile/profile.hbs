@@ -1,0 +1,38 @@
+{{#> Container}}
+  {{> ButtonReturn type='button' path='/chat'}}
+  <div class="profile-wrap">
+    <div class="profile-wrap__avatar">{{> Avatar}}</div>
+    <div class="profile-wrap__title">{{name}}</div>
+    <div class="profile-card-data">        
+      <div class="profile-card-data__data-row">
+        <div>Почта</div>
+        <div>{{email}}</div>
+      </div>
+      <div class="profile-card-data__data-row">
+        <div>Логин</div>
+        <div>{{email}}</div>
+      </div>
+      <div class="profile-card-data__data-row">
+        <div>Имя</div>
+        <div>{{email}}</div>
+      </div>
+      <div class="profile-card-data__data-row">
+        <div>Фамилия</div>
+        <div>{{email}}</div>
+      </div>
+      <div class="profile-card-data__data-row">
+        <div>Имя в чате</div>
+        <div>{{email}}</div>
+      </div>
+      <div class="profile-card-data__data-row">
+        <div>Телефон</div>
+        <div>{{email}}</div>
+      </div>
+    </div>
+    <div class="profile-card-options">
+      <div class="profile-card-options__data-row">{{> Link href='#' text="Изменить данные"}}</div>
+      <div class="profile-card-options__data-row">{{> Link href='/password-edit' text="Изменить пароль"}}</div>
+      <div class="profile-card-options__data-row">{{> Link class='logout' href='/login' text="Выйти"}}</div>
+    </div>
+  </div>
+{{/Container}}
