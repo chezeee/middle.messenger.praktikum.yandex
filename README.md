@@ -41,10 +41,10 @@
 
 ## **Установка и использование проекта локально**
 
-- ```bash git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git``` - клонирование проекта в локальный репозиторий;
-- ```bash npm install``` — установка зависимостей;
-- ```bash npm run build``` — сборка стабильной версии.
-- ```bash npm run start``` — сборка и запуск на 3000 порту версии для разработчика;
+```bash git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git``` - клонирование проекта в локальный репозиторий;
+```bash npm install``` — установка зависимостей;
+```bash npm run build``` — сборка стабильной версии.
+```bash npm run start``` — сборка и запуск на 3000 порту версии для разработчика;
 
 ### **URL страниц для просмотра в режиме разработки**
 
