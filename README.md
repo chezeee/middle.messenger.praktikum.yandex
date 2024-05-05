@@ -1,5 +1,5 @@
 # Sprint 1
-## Ссылка на Pull request слияния ветки "sprint_1" c веткой "main": <https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/10>
+## Ссылка на Pull request слияния ветки "sprint_1" c веткой "main": <https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/12>
 
 # Веб-мессенджер
 
