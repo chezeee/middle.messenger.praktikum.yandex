@@ -1,4 +1,4 @@
-<https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/12>
+https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/14
 
 # Веб-мессенджер
 
@@ -29,7 +29,7 @@
 
 ## **Развертывание приложения из GitHub на хостинге Netlify**
 
-**Веб-приложение доступно для ознакомления по следующей ссылке:** 
+**Веб-приложение доступно для ознакомления по следующей ссылке:**
 
 <https://yp-messenger.netlify.app>
 
