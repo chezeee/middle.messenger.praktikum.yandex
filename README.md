@@ -22,11 +22,13 @@
 ## Дизайн
 
 **Ссылка на макет дизайна прототипа в Figma:**
+
 <https://www.figma.com/file/K0neyWuWIICfWvj6dpIRyg/MyChat_YP?type=design&node-id=0%3A1&mode=design&t=lozDhFoWS0WPqZrN-1>
 
 ## **Развертывание приложения из GitHub на хостинге Netlify**
 
-Веб-приложение доступно для ознакомления по следующей ссылке: 
+**Веб-приложение доступно для ознакомления по следующей ссылке:** 
+
 <https://yp-messenger.netlify.app>
 
 ### **URL страниц:**
@@ -41,10 +43,13 @@
 
 ## **Установка и использование проекта локально**
 
-```bash git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git``` - клонирование проекта в локальный репозиторий;
-```bash npm install``` — установка зависимостей;
-```bash npm run build``` — сборка стабильной версии.
-```bash npm run start``` — сборка и запуск на 3000 порту версии для разработчика;
+```git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git``` - клонирование проекта в локальный репозиторий;
+
+```npm install``` — установка зависимостей;
+
+```npm run build``` — сборка стабильной версии.
+
+```npm run start``` — сборка и запуск на 3000 порту версии для разработчика;
 
 ### **URL страниц для просмотра в режиме разработки**
 
