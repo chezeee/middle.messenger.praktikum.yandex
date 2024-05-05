@@ -7,6 +7,7 @@
 ## Версия
 
 Версия веб-приложения: **_0.0.1_**
+
 **Проект находится в разработке**
 
 ## Технологии, используемые в процессе разработки:
@@ -20,11 +21,13 @@
 
 ## Дизайн
 
-Ссылка на макет в Figma: https://www.figma.com/file/K0neyWuWIICfWvj6dpIRyg/MyChat_YP?type=design&node-id=0%3A1&mode=design&t=lozDhFoWS0WPqZrN-1
+Ссылка на макет в Figma: 
+https://www.figma.com/file/K0neyWuWIICfWvj6dpIRyg/MyChat_YP?type=design&node-id=0%3A1&mode=design&t=lozDhFoWS0WPqZrN-1
 
 ## **Развертывание приложения из GitHub на хостинге Netlify**
 
-Веб-приложение доступно для ознакомления по следующей ссылке: https://yp-messenger.netlify.app
+Веб-приложение доступно для ознакомления по следующей ссылке: 
+https://yp-messenger.netlify.app
 
 ### **URL страниц:**
 
