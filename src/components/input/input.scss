@@ -1,0 +1,33 @@
+.form-input-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 37px;
+
+  &__label {
+    font-weight: 500;
+    font-size: 9px;
+    color: #999999;
+  }
+
+  &__input {
+    font-weight: 500;
+    font-size: 13px;
+    width: 280px;
+    padding: 8px 0 7px;
+    border: 0;
+    border-bottom: 1px #3369f3 solid;
+  }
+  
+  &__input::placeholder {
+    color: #999999;
+    font-size: 12px;
+  }
+
+  &__input:active,
+  &__input:hover,
+  &__input:focus {
+    outline: 0;
+    outline-offset: 0;
+  }
+}

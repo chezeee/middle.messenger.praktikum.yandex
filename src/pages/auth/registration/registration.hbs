@@ -1,0 +1,18 @@
+{{#> Container}}
+  <div class="reg-wrap">
+    {{> Title text='Регистрация'}}
+    <form class="reg-wrap__reg-form">
+      <div class="reg-wrap__reg-form__inputs">
+      {{> Input type='email' name='login' label='Почта' placeholder='почту'}}
+      {{> Input type='text' name='login' label='Логин' placeholder='логин'}}
+      {{> Input type='text' name='first_name' label='Имя' placeholder='имя'}}
+      {{> Input type='text' name='second_name' label='Фамилия' placeholder='фамилию'}}
+      {{> Input type='text' name='phone' label='Телефон' placeholder='телефон' }}
+      {{> Input type='password' name='password' label='Пароль' placeholder='пароль'}}
+      {{> Input type='password' name='password_repeat' label='Пароль (ещё раз)' placeholder='пароль ещё раз'}}
+      </div>
+      {{> ButtonApply text='Создать аккаунт'}}
+    </form>
+    {{> Link href='/login' text="Войти"}}
+  </div>
+{{/Container}}
