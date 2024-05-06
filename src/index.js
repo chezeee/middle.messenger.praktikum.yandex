@@ -9,6 +9,7 @@ const pages = {
   chatList: [Pages.ChatList],
   profile: [Pages.Profile],
   passwordEdit: [Pages.PasswordEdit],
+  profileEdit: [Pages.ProfileEdit],
   error404: [Pages.Error404],
   error500: [Pages.Error500],
 };
@@ -45,6 +46,10 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
     case '/password-edit': {
       nav('passwordEdit');
+      break;
+    }
+    case '/profile-edit': {
+      nav('profileEdit');
       break;
     }
     case '/error404': {

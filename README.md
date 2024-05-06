@@ -39,6 +39,7 @@ https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/14
 - <https://yp-messenger.netlify.app/registration> - страница регистрации пользователя
 - <https://yp-messenger.netlify.app/chat> - страница c списком чатом и лентой переписки
 - <https://yp-messenger.netlify.app/profile> - страница c информацией о пользователе
+- <https://yp-messenger.netlify.app/profile-edit> - страница для изменения данных пользователя
 - <https://yp-messenger.netlify.app/password-edit> - страница для смены пароля пользователя
 - <https://yp-messenger.netlify.app/error404> - страница с ошибкой 404
 - <https://yp-messenger.netlify.app/error500> - страница с ошибкой 500
@@ -59,6 +60,7 @@ https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/14
 - <http://localhost:3000/registration> - страница регистрации пользователя
 - <http://localhost:3000/chat> - страница c списком чатом и лентой переписки
 - <http://localhost:3000/profile> - страница c информацией о пользователе
+- <http://localhost:3000/profile-edit> - страница для изменения данных пользователя
 - <http://localhost:3000/password-edit> - страница для смены пароля пользователя
 - <http://localhost:3000/error404> - страница с ошибкой 404
 - <http://localhost:3000/error500> - страница с ошибкой 500
