@@ -1,0 +1,37 @@
+{{#> Container}}
+{{> ButtonReturn type='button' path='/profile'}}
+  <div class="profile-wrap profile-password-edit-wrap profile-edit-wrap">
+    <div class="profile-wrap__avatar">{{> Avatar}}</div>
+    <div class="profile-wrap__title">{{name}}</div>
+    <form class="form-password-edit form-profile-edit" action="">
+      <div class="form-password-edit__fields">       
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_email">Почта</label>
+          <input class="form-password-edit__fields__row__input" type="email" id="edit_email" name="email" placeholder="Введите новую почту..." >
+        </div>
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_login">Логин</label>
+          <input class="form-password-edit__fields__row__input" type="text" id="edit_login" name="login" placeholder="Введите новый логин..." >
+        </div>
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_first_name">Имя</label>
+          <input class="form-password-edit__fields__row__input" type="text" id="edit_first_name" name="first_name" placeholder="Введите имя..." >
+        </div>
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_second_name">Фамилия</label>
+          <input class="form-password-edit__fields__row__input" type="text" id="edit_second_name" name="second_name" placeholder="Введите фамилию..." >
+        </div>
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_display_name">Имя в чате</label>
+          <input class="form-password-edit__fields__row__input" type="text" id="edit_display_name" name="display_name" placeholder="Введите имя..." >
+        </div>
+        <div class="form-password-edit__fields__row">
+          <label class="form-password-edit__fields__row__label" for="edit_phone">Телефон</label>
+          <input class="form-password-edit__fields__row__input" type="text" id="edit_phone" name="phone" placeholder="Введите новый телефон..." >
+        </div>
+      </div>
+      {{> ButtonApply text='Сохранить' type='submit'}}
+    </form>
+    
+  </div>
+{{/Container}}

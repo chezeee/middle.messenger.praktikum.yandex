@@ -1,0 +1,25 @@
+.error-wrap {
+  display: flex;
+  height: 160px;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80px;
+}
+
+.error-title {
+  text-align: center;
+  font-weight: 500;
+  font-size: 40px;
+}
+
+.error-message {
+  font-size: 20px;
+  text-align: center;
+}
