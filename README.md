@@ -1,5 +1,3 @@
-https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/14
-
 # Веб-мессенджер
 
 ## Описание

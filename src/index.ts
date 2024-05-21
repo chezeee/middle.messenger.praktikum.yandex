@@ -1,9 +1,10 @@
+//@ts-nocheck
 import './style.scss';
 import Handlebars from 'handlebars';
 import * as Components from './components';
 import * as Pages from './pages';
 
-const pages = {
+const pages: Record<string, string[]> = {
   login: [Pages.Login],
   registration: [Pages.Registration],
   chatList: [Pages.ChatList],
@@ -18,15 +19,15 @@ for (let key in Components) {
   Handlebars.registerPartial(key, Components[key]);
 }
 
-const nav = (page) => {
-  const [src, assets] = pages[page];
+const nav = (page: string): void => {
+  const [src, assets]: string[] = pages[page];
   const handlebars = Handlebars.compile(src);
-  document.getElementById('app').innerHTML = handlebars(assets);
+  const app: HTMLElement = document.getElementById('app');
+  app.innerHTML = handlebars(assets);
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
-  const path = event.target.location.pathname;
-
+  const path: string = event.target.location.pathname;
   switch (path) {
     case '/login': {
       nav('login');

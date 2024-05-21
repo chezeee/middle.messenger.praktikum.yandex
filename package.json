@@ -6,17 +6,17 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
+    "prebuild": "tsc --noEmit",
+    "build": "npm run prebuild vite build --emptyOutDir",
     "preview": "vite preview"
   },
-  "devDependencies": {
+  "dependencies": {
     "express": "^4.19.2",
+    "handlebars": "^4.7.8",
+    "sass": "^1.76.0",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0",
     "vite-plugin-handlebars": "^2.0.0"
-  },
-  "dependencies": {
-    "handlebars": "^4.7.8",
-    "sass": "^1.76.0"
   },
   "engines": {
     "node": "18.0.0"
