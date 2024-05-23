@@ -1,7 +1,9 @@
 //@ts-nocheck
 import EventBus from './EventBus';
+import { v4 } from 'uuid';
+import Handlebars from 'handlebars';
 
-export default class Block {
+export default class Component {
   static EVENTS = {
     INIT: 'init',
     FLOW_CDM: 'flow:component-did-mount',
@@ -9,7 +11,11 @@ export default class Block {
     FLOW_RENDER: 'flow:render',
   };
 
-  _element = null;
+  _props;
+  _children;
+  _element: HTMLElement;
+  _id;
+  _eventBus;
   _meta = null;
 
   /** JSDoc
@@ -18,19 +24,41 @@ export default class Block {
    *
    * @returns {void}
    */
-  constructor(tagName: string = 'div', props = {}) {
+
+  constructor(tagName: string = 'div', propsAndChilds = {}) {
+    const { props, children } = this._getChildren(propsAndChilds);
     const eventBus = new EventBus();
+    propsAndChilds = {};
     this._meta = {
       tagName,
       props,
     };
+    this._id = v4();
+    this._props = this._makePropsProxy({ ...props, _id: this._id });
+    this._children = this._makePropsProxy(children);
 
-    this.props = this._makePropsProxy(props);
-
-    this.eventBus = () => eventBus;
-
+    this._eventBus = () => eventBus;
     this._registerEvents(eventBus);
-    eventBus.emit(Block.EVENTS.INIT);
+    this._eventBus.emit(Block.EVENTS.INIT);
+  }
+
+  get element() {
+    return this._element;
+  }
+
+  _getChildren(propsAndChilds) {
+    const props = {};
+    const children = {};
+
+    Object.entries(propsAndChilds).forEach(([key, value]) => {
+      if (value instanceof Component) {
+        children[key] = value;
+      } else {
+        props[key] = value;
+      }
+    });
+
+    return { props, children };
   }
 
   _registerEvents(eventBus) {
@@ -57,7 +85,7 @@ export default class Block {
   // Может переопределять пользователь, необязательно трогать
   componentDidMount(oldProps) {}
 
-  dispatchComponentDidMoun() {
+  dispatchComponentDidMount() {
     this.eventBus().emit(Block.EVENTS.FLOW_CDM);
   }
 
@@ -80,35 +108,70 @@ export default class Block {
       return;
     }
 
-    Object.assign(this.props, nextProps);
+    Object.assign(this._props, nextProps);
   };
 
-  get element() {
-    return this._element;
+  addAttribute() {
+    const { attr = {} } = this._props;
+
+    Object.entries(attr).forEach(([key, value]) => {
+      this._element.setAttribute(key, value);
+    });
   }
 
   _addEvents() {
-    const { events = {} } = this.props;
+    const { events = {} } = this._props;
 
     Object.keys(events).forEach((eventName) => {
       this._element.addEventListener(eventName, events[eventName]);
     });
   }
 
+  _removeEvents() {
+    const { events } = this.props;
+
+    if (events) {
+      Object.keys(events).forEach((eventName) => {
+        this._element.removeEventListener(eventName, events[eventName]);
+      });
+    }
+  }
+
+  compile(template: string, props) {
+    const propsAndStubs = { ...props };
+
+    Object.entries(propsAndStubs).forEach(([key, child]) => {
+      propsAndStubs[key] = `<div data-id="${child._id}"></div>`;
+    });
+
+    const fragment = this._createDocumentElement('template');
+    Object.fragment.innerHTML = Handlebars.compile(template)(propsAndStubs);
+
+    Object.values(this._children).forEach((child: Component) => {
+      const stub = fragment.content.querySelector(`[data-id="${child._id}"]`);
+
+      stub?.replaceWith(child.getContent());
+    });
+
+    return fragment.content;
+  }
+
   _render() {
     const block = this.render();
-    // Этот небезопасный метод для упрощения логики
-    // Используйте шаблонизатор из npm или напишите свой безопасный
-    // Нужно не в строку компилировать (или делать это правильно),
-    // либо сразу в DOM-элементы возвращать из compile DOM-ноду
-    this._element.innerHTML = block;
+    this._removeEvents();
+    this._element.innerHTML = '';
+    this._element.appendChild(block);
+    this._addEvents();
+    this.addAttribute();
   }
 
   // Может переопределять пользователь, необязательно трогать
-  render() {}
+  render() {
+    return this.compile('');
+  }
 
   getContent() {
-    return this.element;
+    return this._element;
   }
 
   _makePropsProxy(props) {
@@ -135,9 +198,9 @@ export default class Block {
     });
   }
 
-  _createDocumentElement(tagName) {
+  _createDocumentElement(tagName): HTMLElement {
     // Можно сделать метод, который через фрагменты в цикле создаёт сразу несколько блоков
-    return document.createElement(tagName);
+    return document.createElement(tagName ? tagName : 'div');
   }
 
   show() {

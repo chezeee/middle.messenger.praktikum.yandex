@@ -1,6 +1,7 @@
 //@ts-nocheck
 import './style.scss';
 import Handlebars from 'handlebars';
+import { render } from './utils/renderDOM';
 import * as Components from './components';
 import * as Pages from './pages';
 
@@ -22,8 +23,9 @@ for (let key in Components) {
 const nav = (page: string): void => {
   const [src, assets]: string[] = pages[page];
   const handlebars = Handlebars.compile(src);
-  const app: HTMLElement = document.getElementById('app');
-  app.innerHTML = handlebars(assets);
+  // const app: HTMLElement = document.getElementById('app');
+  // app.innerHTML = handlebars(assets);
+  render('#app', handlebars(assets));
 };
 
 document.addEventListener('DOMContentLoaded', (event) => {
