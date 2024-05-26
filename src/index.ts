@@ -1,12 +1,15 @@
 //@ts-nocheck
-import './style.scss';
-import Handlebars from 'handlebars';
-import { render } from './utils/renderDOM';
-import * as Components from './components';
-import * as Pages from './pages';
 
-const pages: Record<string, string[]> = {
-  login: [Pages.Login],
+// import Handlebars from 'handlebars';
+// import Component from './services/Component';
+import { render } from './utils/renderDOM';
+// import * as Components from './components';
+// import { Container } from './components';
+import * as Pages from './pages';
+import './style.scss';
+
+const pages: Record<string, Component> = {
+  login: Pages.LoginPage,
   registration: [Pages.Registration],
   chatList: [Pages.ChatList],
   profile: [Pages.Profile],
@@ -16,51 +19,58 @@ const pages: Record<string, string[]> = {
   error500: [Pages.Error500],
 };
 
-for (let key in Components) {
-  Handlebars.registerPartial(key, Components[key]);
-}
+// console.log('Container', Container);
 
-const nav = (page: string): void => {
-  const [src, assets]: string[] = pages[page];
-  const handlebars = Handlebars.compile(src);
-  // const app: HTMLElement = document.getElementById('app');
-  // app.innerHTML = handlebars(assets);
-  render('#app', handlebars(assets));
-};
+// for (let key in Components) {
+//   Handlebars.registerPartial(key, Components[key]);
+// }
+
+// Handlebars.registerPartial('Container', Container);
+
+// const render = (page: string): void => {
+//   // const [src, assets]: string[] = pages[page];
+
+//   const app: HTMLElement = document.getElementById('app');
+//   console.log('pages', pages);
+//   app.appendChild(pages[page].getContent());
+//   return; // const handlebars = Handlebars.compile(src);
+//   // app.innerHTML = handlebars(assets);
+//   // render('#app', handlebars(assets));
+// };
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const path: string = event.target.location.pathname;
   switch (path) {
     case '/login': {
-      nav('login');
+      render('#app', pages['login']);
       break;
     }
     case '/registration': {
-      nav('registration');
+      render('#app', pages['registration']);
       break;
     }
     case '/chat': {
-      nav('chatList');
+      render('#app', pages['chatList']);
       break;
     }
     case '/profile': {
-      nav('profile');
+      render('#app', pages['profile']);
       break;
     }
     case '/password-edit': {
-      nav('passwordEdit');
+      render('#app', pages['passwordEdit']);
       break;
     }
     case '/profile-edit': {
-      nav('profileEdit');
+      render('#app', pages['profileEdit']);
       break;
     }
     case '/error404': {
-      nav('error404');
+      render('#app', pages['error404']);
       break;
     }
     case '/error500': {
-      nav('error500');
+      render('#app', pages['error500']);
       break;
     }
     default: {

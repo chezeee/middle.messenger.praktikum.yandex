@@ -1,0 +1,13 @@
+  {{#if label}}
+    <label class='form-input-wrap__label' >{{label}}</label>
+  {{/if}}
+  <input class='form-input-wrap__input' type={{type}}
+    id={{id}}
+    name={{name}}
+    placeholder='Введите {{placeholder}}...'
+    pattern={{pattern}}
+    value={{value}}
+  {{#if isRequired}}required{{/if}}/>
+  
+
+

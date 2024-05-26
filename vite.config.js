@@ -3,6 +3,7 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({
+  // assetsInclude: ['**/*.hbs'], 
   root: resolve(__dirname, 'src'),
   publicDir: resolve(__dirname, './public'),
   build: {

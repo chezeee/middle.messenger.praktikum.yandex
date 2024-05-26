@@ -1,4 +1,4 @@
-export { Login } from './auth/login';
+export { LoginPage } from './auth/login';
 export { Registration } from './auth/registration';
 export { ChatList } from './chat-list';
 export { Profile } from './profile';
