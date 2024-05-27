@@ -4,7 +4,7 @@ import './link.scss';
 
 export default class Link extends Component {
   constructor(props: ComponentProps) {
-    super('a', { ...props, attr: { href: '', class: 'link' } });
+    super('a', props);
   }
 
   render() {

@@ -2,9 +2,9 @@ import Component, { ComponentProps } from '../../services/Component';
 import template from './template.hbs?raw';
 import './form.scss';
 
-export default class Button extends Component {
+export default class Form extends Component {
   constructor(props: ComponentProps) {
-    super('form', props);
+    super('form', {...props, attr: {class: 'form'}});
   }
 
   render() {
