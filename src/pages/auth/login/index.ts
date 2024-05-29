@@ -5,6 +5,7 @@ import Input from '../../../components/input';
 import Form from '../../../components/form';
 import Button from '../../../components/buttons/button';
 import Link from '../../../components/link';
+import '../auth.scss';
 import './login.scss';
 
 const formFields = [
@@ -13,12 +14,14 @@ const formFields = [
     type: 'text',
     name: 'login',
     placeholder: 'логин',
+    attr: { class: 'form-input-wrap' },
   }),
   new Input({
     label: 'Пароль',
     type: 'text',
     name: 'password',
     placeholder: 'пароль',
+    attr: { class: 'form-input-wrap' },
   }),
 ];
 
@@ -38,11 +41,13 @@ export const LoginPage = new Login('section', {
       text: 'Войти',
       attr: { type: 'submit', class: 'buttonApply' },
     }),
+    attr: { class: 'auth-form-login' },
   }),
 
   link: new Link({
     text: 'Вы ещё не зарегистрированы?',
-    attr: { href: '/registration', class: 'link' },
+    href: '/registration',
+    attr: { class: 'link' },
   }),
-  attr: { class: 'login-wrap' },
+  attr: { class: 'section-wrap login' },
 });

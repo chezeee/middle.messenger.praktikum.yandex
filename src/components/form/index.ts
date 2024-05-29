@@ -4,7 +4,7 @@ import './form.scss';
 
 export default class Form extends Component {
   constructor(props: ComponentProps) {
-    super('form', {...props, attr: {class: 'form'}});
+    super('form', props);
   }
 
   render() {

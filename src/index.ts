@@ -1,7 +1,6 @@
 //@ts-nocheck
 
-// import Handlebars from 'handlebars';
-// import Component from './services/Component';
+import Component from './services/Component';
 import { render } from './utils/renderDOM';
 // import * as Components from './components';
 // import { Container } from './components';
@@ -10,11 +9,11 @@ import './style.scss';
 
 const pages: Record<string, Component> = {
   login: Pages.LoginPage,
-  registration: [Pages.Registration],
+  registration: Pages.RegistrationPage,
   chatList: [Pages.ChatList],
-  profile: [Pages.Profile],
-  passwordEdit: [Pages.PasswordEdit],
-  profileEdit: [Pages.ProfileEdit],
+  profile: Pages.ProfilePage,
+  passwordEdit: Pages.PasswordEditPage,
+  profileEdit: Pages.ProfileEditPage,
   error404: [Pages.Error404],
   error500: [Pages.Error500],
 };

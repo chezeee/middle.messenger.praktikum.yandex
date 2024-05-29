@@ -1,7 +1,11 @@
-.reg-wrap {
+.registration {
   height: 615px;
 
-  &__reg-form {
+  .auth-form-reg {
     height: 450px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 13px;
   }
 }

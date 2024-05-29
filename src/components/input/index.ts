@@ -4,7 +4,7 @@ import './input.scss';
 
 export default class Input extends Component {
   constructor(props: ComponentProps) {
-    super('div', { ...props, attr: { class: 'form-input-wrap' } });
+    super('div', props);
   }
 
   render() {

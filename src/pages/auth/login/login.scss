@@ -1,7 +1,11 @@
-.login-wrap {
+.login {
   height: 460px;
 
-  .form {
+  .auth-form-login {
     height: 285px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 0 13px;
   }
 }

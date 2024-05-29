@@ -1,6 +1,6 @@
 import Component, { ComponentProps } from '../../../services/Component';
 import template from './template.hbs?raw';
-import './buttonApply.scss';
+import './button.scss';
 
 export default class Button extends Component {
   constructor(props: ComponentProps) {

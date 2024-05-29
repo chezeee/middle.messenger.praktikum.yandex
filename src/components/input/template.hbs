@@ -5,9 +5,10 @@
     id={{id}}
     name={{name}}
     placeholder='Введите {{placeholder}}...'
-    pattern={{pattern}}
-    value={{value}}
-  {{#if isRequired}}required{{/if}}/>
+    value="{{value}}"
+    
+  {{#if isRequired}}required{{/if}}
+  {{#if isReadOnly}}readonly{{/if}}/>
   
 
 
