@@ -1,4 +1,4 @@
-import Component, { ComponentProps } from '../../../services/Component';
+import Component, { ComponentProps } from '../../services/Component';
 import template from './template.hbs?raw';
 import './button.scss';
 

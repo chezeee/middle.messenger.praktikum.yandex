@@ -3,9 +3,12 @@ import Component from '../../services/Component';
 import Title from '../../components/title';
 import Input from '../../components/input';
 import Form from '../../components/form';
-import Button from '../../components/buttons/button';
+import Button from '../../components/button';
 import Link from '../../components/link';
 import './passwordEdit.scss';
+import Avatar from '../../components/avatar';
+
+const avatar = new Avatar({});
 
 const formFields = [
   new Input({
@@ -45,6 +48,7 @@ export const PasswordEditPage = new PasswordEdit('section', {
       onclick: "window.location='/profile'",
     },
   }),
+  avatar: avatar,
   title: new Title({
     text: '',
   }),

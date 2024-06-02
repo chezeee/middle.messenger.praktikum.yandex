@@ -3,9 +3,22 @@ import Component from '../../services/Component';
 import Title from '../../components/title';
 import Input from '../../components/input';
 import Form from '../../components/form';
-import Button from '../../components/buttons/button';
+import Button from '../../components/button';
 import Link from '../../components/link';
+import Avatar from '../../components/avatar';
+import Modal from '../../components/modal';
 import './profileEdit.scss';
+
+const modalAvatar = new Modal({ content: 'Смена аватара!' });
+
+const avatar = new Avatar({
+  events: {
+    click: () => {
+      console.log('modalAvatar', modalAvatar.show);
+      return modalAvatar.show();
+    },
+  },
+});
 
 const formFields = [
   new Input({
@@ -66,6 +79,8 @@ export const ProfileEditPage = new ProfileEdit('section', {
       onclick: "window.location='/profile'",
     },
   }),
+  avatar: avatar,
+  modal: modalAvatar,
   title: new Title({
     text: '',
   }),

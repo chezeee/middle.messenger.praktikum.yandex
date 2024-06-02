@@ -1,11 +1,14 @@
 import template from './template.hbs?raw';
 import Component from '../../services/Component';
+import Avatar from '../../components/avatar';
 import Title from '../../components/title';
 import Input from '../../components/input';
 import Form from '../../components/form';
-import Button from '../../components/buttons/button';
+import Button from '../../components/button';
 import Link from '../../components/link';
 import './profile.scss';
+
+const avatar = new Avatar({});
 
 const formFields = [
   new Input({
@@ -93,8 +96,9 @@ export const ProfilePage = new Profile('section', {
       onclick: "window.location='/chat'",
     },
   }),
+  avatar: avatar,
   title: new Title({
-    text: '',
+    text: 'Илья Ялымов',
   }),
   form: new Form({
     formFields,

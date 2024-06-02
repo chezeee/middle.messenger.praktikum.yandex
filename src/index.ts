@@ -2,40 +2,19 @@
 
 import Component from './services/Component';
 import { render } from './utils/renderDOM';
-// import * as Components from './components';
-// import { Container } from './components';
 import * as Pages from './pages';
 import './style.scss';
 
 const pages: Record<string, Component> = {
   login: Pages.LoginPage,
   registration: Pages.RegistrationPage,
-  chatList: [Pages.ChatList],
+  chat: Pages.ChatPage,
   profile: Pages.ProfilePage,
   passwordEdit: Pages.PasswordEditPage,
   profileEdit: Pages.ProfileEditPage,
   error404: [Pages.Error404],
   error500: [Pages.Error500],
 };
-
-// console.log('Container', Container);
-
-// for (let key in Components) {
-//   Handlebars.registerPartial(key, Components[key]);
-// }
-
-// Handlebars.registerPartial('Container', Container);
-
-// const render = (page: string): void => {
-//   // const [src, assets]: string[] = pages[page];
-
-//   const app: HTMLElement = document.getElementById('app');
-//   console.log('pages', pages);
-//   app.appendChild(pages[page].getContent());
-//   return; // const handlebars = Handlebars.compile(src);
-//   // app.innerHTML = handlebars(assets);
-//   // render('#app', handlebars(assets));
-// };
 
 document.addEventListener('DOMContentLoaded', (event) => {
   const path: string = event.target.location.pathname;
@@ -49,7 +28,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
       break;
     }
     case '/chat': {
-      render('#app', pages['chatList']);
+      render('#app', pages['chat']);
       break;
     }
     case '/profile': {

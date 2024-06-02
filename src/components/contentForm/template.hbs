@@ -1,0 +1,7 @@
+{{#if idActiveChat}}<div class='content-form__header'>{{{userList}}}{{{buttonChatOpts}}}</div>
+<div class="content-form__main">{{{contentDisplay}}}</div>
+{{{msgSendingForm}}}
+</if>
+{{else}}
+<div class="no-active-chats-wrap"><div class="no-active-chats-msg">Выберите чат, чтобы отправить сообщение</div></div>
+{{/if}}

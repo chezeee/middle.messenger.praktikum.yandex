@@ -1,0 +1,22 @@
+.chat-list-wrap {
+  min-width: 310px;
+  height: 100vh;
+  padding: 16px 0;
+  overflow-y: scroll;
+  background-color: #fbfbfb;
+  border-right: 1px solid #eaeaea;
+
+  -ms-overflow-style: none; /* IE и Edge */
+  scrollbar-width: none;
+}
+
+/* Скрываем scrollbar для Chrome, Safari и Opera */
+.chat-list-wrap::-webkit-scrollbar {
+  display: none;
+}
+
+.chat-list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px 18px 10px;
+}

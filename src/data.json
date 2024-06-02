@@ -1,0 +1,44 @@
+{
+  "chat": {
+    "chatList": [
+      {
+        "id": "5bedc120-bb08-4051-beeb-d777bbd0d7a2",
+        "title": "Андрей",
+        "messages": [
+          {
+            "date": "2024-05-25T10:49:00.000Z",
+            "content": "Consectetur Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          },
+          {
+            "outgoing": true,
+            "date": "2024-05-29T12:52:00.000Z",
+            "content": "Amet Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          },
+          {
+            "date": "2024-05-31T16:14:00.000Z",
+            "content": "Ipsum Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          }
+        ]
+      },
+      {
+        "id": "3c3d271b-b9af-4508-9fd5-7cb0b4d4a786",
+        "title": "Киноклуб",
+        "messages": [
+          {
+            "date": "2024-05-29T10:49:00.000Z",
+            "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit,m ipsum dolor sit amet, consectetur adipi sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          },
+          {
+            "date": "2024-05-30T17:52:00.000Z",
+            "content": "Lorem ipsum dolor st, consectetur adipiscing elit, sed do eiusmod tempor incididunit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          },
+          {
+            "outgoing": true,
+            "date": "2024-05-31T20:14:00.000Z",
+            "content": "Lorem ipsumt amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magn dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -3,7 +3,7 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({
-  // assetsInclude: ['**/*.hbs'], 
+  // assetsInclude: ['**/*.hbs'],
   root: resolve(__dirname, 'src'),
   publicDir: resolve(__dirname, './public'),
   build: {
@@ -12,6 +12,15 @@ export default defineConfig({
       input: {
         index: resolve(__dirname, 'src/index.html'),
       },
+    },
+    target: 'es2022',
+  },
+  esbuild: {
+    target: 'es2022',
+  },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'es2022',
     },
   },
   plugins: [

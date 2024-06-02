@@ -34,11 +34,12 @@ export default class Component {
     this._eventBus = new EventBus();
     this._tagName = tagName;
     this._id = v4();
-    this.props = this._makePropsProxy({ ...props, _id: this._id });
+    this.props = this._makePropsProxy({ ...props, id: this._id });
     this._children = this._makePropsProxy(children);
     this._lists = this._makePropsProxy(lists);
     this._registerEvents(this._eventBus);
     this._eventBus.emit(Component.EVENTS.INIT);
+    // this.props.attr = { id: this._id };
   }
 
   get element() {

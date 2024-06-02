@@ -3,7 +3,7 @@ import Component from '../../../services/Component';
 import Title from '../../../components/title';
 import Input from '../../../components/input';
 import Form from '../../../components/form';
-import Button from '../../../components/buttons/button';
+import Button from '../../../components/button';
 import Link from '../../../components/link';
 import './registration.scss';
 
