@@ -75,7 +75,7 @@ export const ProfileEditPage = new ProfileEdit('section', {
   button: new Button({
     attr: {
       type: 'button',
-      class: 'buttonReturn',
+      class: 'button-return',
       onclick: "window.location='/profile'",
     },
   }),
@@ -88,7 +88,7 @@ export const ProfileEditPage = new ProfileEdit('section', {
     formFields,
     button: new Button({
       text: 'Сохранить',
-      attr: { type: 'submit', class: 'buttonApply' },
+      attr: { type: 'submit', class: 'button-apply' },
     }),
     attr: { class: 'form profile-edit-form' },
   }),

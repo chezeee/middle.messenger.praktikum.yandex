@@ -1,5 +1,7 @@
 import { resolve } from 'path';
 import { defineConfig } from 'vite';
+
+/* eslint-disable */
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({

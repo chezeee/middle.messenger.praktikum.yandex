@@ -1,32 +1,3 @@
-// .profile-wrap {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   height: 551px;
-//   align-items: center;
-//   &__avatar{
-//     text-align: center;
-//   }
-// }
-
-// .profile-card-data,
-// .profile-card-options {
-//   width: 510px;
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-
-//   &__data-row {
-//     display: flex;
-//     justify-content: space-between;
-//     border-top: 1px solid #eaeaea;
-//     padding: 10px 0;
-//   }
-//   &__data-row:first-child {
-//     border: 0;
-//   }
-// }
-
 .profile-form {
   height: 330px;
 }
@@ -38,7 +9,7 @@
 .profile-row input {
   font-weight: 500;
   font-size: 13px;
-  color: #999999;
+  color: #999;
   text-align: right;
 }
 
@@ -51,16 +22,19 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
   &__data-row {
     display: flex;
     justify-content: space-between;
     border-top: 1px solid #eaeaea;
     padding: 10px 0;
   }
+
   &__data-row:first-child {
     border: 0;
   }
+
   &__data-row:last-child .link {
-    color: #ff0000;
+    color: #f00;
   }
 }

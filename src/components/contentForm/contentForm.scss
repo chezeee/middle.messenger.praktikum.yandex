@@ -11,6 +11,7 @@
     justify-content: space-between;
     border-bottom: 1px solid #eaeaea;
   }
+
   &__main {
     display: flex;
     height: 100vh;
@@ -20,6 +21,7 @@
     scrollbar-width: thin;
     gap: 10px;
   }
+
   &__text-field {
     border-top: 1px solid #eaeaea;
     height: 54px;
@@ -37,5 +39,5 @@
 .no-active-chats-msg {
   font-weight: 500;
   font-size: 12px;
-  color: #999999;
+  color: #999;
 }

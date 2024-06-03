@@ -1,15 +1,15 @@
-.buttonApply {
+.button-apply {
   width: 280px;
   height: 37px;
   background: #3369f3;
   border: 0;
   border-radius: 8px;
   padding: 12px 0;
-  color: #ffffff;
+  color: #fff;
   cursor: pointer;
 }
 
-.buttonReturn {
+.button-return {
   position: fixed;
   top: 0;
   left: 0;
@@ -22,7 +22,7 @@
   cursor: pointer;
 }
 
-.buttonChatOptions {
+.button-chat-options {
   position: fixed;
   top: 0;
   left: 0;

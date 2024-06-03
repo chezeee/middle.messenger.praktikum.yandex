@@ -1,6 +1,6 @@
 import template from './template.hbs?raw';
-// import HTTPTransport from '../../utils/HTTPTransport';
 import Component from '../../services/Component';
+// import HTTPTransport from '../../utils/HTTPTransport';
 import ContentForm from '../../components/contentForm';
 import ChatCard from '../../components/chatCard';
 import ChatList from '../../components/chatList';
@@ -8,6 +8,7 @@ import Message from '../../components/message';
 import Button from '../../components/button';
 import MsgSendingForm from '../../components/msgSendingForm';
 import data from '../../data.json';
+
 import './chat.scss';
 
 // const requests = new HTTPTransport();
@@ -15,8 +16,7 @@ import './chat.scss';
 //   .get('/data.json', { headers: { 'Content-Type': 'application/json' } })
 //   .then((data: XMLHttpRequest) => {
 //     return JSON.parse(data.response).chat.chatList;
-//   });
-
+//   });constresponse
 // response.then((data) => {
 //   data.forEach(
 //     ({ title, messages }: Record<string, Record<string, string>[]>) => {
@@ -30,23 +30,20 @@ import './chat.scss';
 //     }
 //   );
 // });
-
 // console.log('chatCards', chatCards);
-
 // Не удаётся отрендерить массив компонентов "chatCards", полученный через GET запрос из data.json. (реализовал закомментированным кодом выше)
 // Возможно проблема с ассинхронным получением данных, но с её решением не успел разобраться.
-
 let contentForm = new ContentForm({
   buttonChatOpts: new Button({ text: 'Опции' }),
   msgSendingForm: new MsgSendingForm({
-    buttonAttachment: new Button({ text: 'Прикрепить' }),
+    buttonAttachment: new Button({ type: 'button', text: 'Прикрепить' }),
     name: 'message',
-    buttonSmiles: new Button({ text: 'Прикрепить' }),
+    buttonSmiles: new Button({ type: 'button', text: 'Смайлы' }),
     ButtonSubmit: new Button({
       type: 'submit',
       text: 'Отправить',
       events: {
-        click: (evt) => {
+        click: (evt: Event) => {
           evt.preventDefault();
           const date = new Date();
           const content = (
@@ -54,7 +51,6 @@ let contentForm = new ContentForm({
               '.sending-form__message'
             ) as HTMLTextAreaElement
           )?.value;
-
           data.chat.chatList.forEach((chat) => {
             if (chat.id === contentForm.props.idActiveChat && content !== '') {
               chat.messages.push({
@@ -70,7 +66,6 @@ let contentForm = new ContentForm({
     }),
   }),
 });
-
 const chatCards: Component[] = data.chat.chatList.map(
   ({ id, title, messages }) => {
     return new ChatCard({
@@ -79,7 +74,7 @@ const chatCards: Component[] = data.chat.chatList.map(
       lastMessage: messages[messages.length - 1].content,
       attr: { id: `${id}` },
       events: {
-        click: (evt) => {
+        click: (evt: Event) => {
           document
             .querySelectorAll('.card')
             .forEach((card) => card.classList.remove('active'));
@@ -106,13 +101,12 @@ const chatCards: Component[] = data.chat.chatList.map(
             idActiveChat: id,
             contentDisplay: contentDisplay,
           });
-
-          console.log('messages', contentDisplay);
         },
       },
     });
   }
 );
+chatCards;
 
 class Chat extends Component {
   render() {
@@ -123,7 +117,11 @@ class Chat extends Component {
 export const ChatPage = new Chat('section', {
   chatList: new ChatList({
     buttonCreate: new Button({ text: 'Создать чат' }),
-    buttonMyProfile: new Button({ text: 'Мой профиль' }),
+    buttonMyProfile: new Button({
+      type: 'button',
+      text: 'Мой профиль',
+      attr: { onclick: "window.location='/profile'" },
+    }),
     chatCards: chatCards,
   }),
 

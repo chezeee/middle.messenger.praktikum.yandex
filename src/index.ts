@@ -1,5 +1,3 @@
-//@ts-nocheck
-
 import Component from './services/Component';
 import { render } from './utils/renderDOM';
 import * as Pages from './pages';
@@ -12,12 +10,12 @@ const pages: Record<string, Component> = {
   profile: Pages.ProfilePage,
   passwordEdit: Pages.PasswordEditPage,
   profileEdit: Pages.ProfileEditPage,
-  error404: [Pages.Error404],
-  error500: [Pages.Error500],
+  // error404: [Pages.Error404],
+  // error500: [Pages.Error500],
 };
 
-document.addEventListener('DOMContentLoaded', (event) => {
-  const path: string = event.target.location.pathname;
+document.addEventListener('DOMContentLoaded', (event: Event) => {
+  const path: string = (event.target as Window)?.location.pathname;
   switch (path) {
     case '/login': {
       render('#app', pages['login']);

@@ -7,7 +7,7 @@
   &__label {
     font-weight: 500;
     font-size: 9px;
-    color: #999999;
+    color: #999;
   }
 
   &__input {
@@ -18,9 +18,9 @@
     border: 0;
     border-bottom: 1px #3369f3 solid;
   }
-  
+
   &__input::placeholder {
-    color: #999999;
+    color: #999;
     font-size: 12px;
   }
 

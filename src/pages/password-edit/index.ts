@@ -5,8 +5,8 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import Button from '../../components/button';
 import Link from '../../components/link';
-import './passwordEdit.scss';
 import Avatar from '../../components/avatar';
+import './passwordEdit.scss';
 
 const avatar = new Avatar({});
 
@@ -44,7 +44,7 @@ export const PasswordEditPage = new PasswordEdit('section', {
   button: new Button({
     attr: {
       type: 'button',
-      class: 'buttonReturn',
+      class: 'button-return',
       onclick: "window.location='/profile'",
     },
   }),
@@ -56,9 +56,10 @@ export const PasswordEditPage = new PasswordEdit('section', {
     formFields,
     button: new Button({
       text: 'Сохранить',
-      attr: { type: 'submit', class: 'buttonApply' },
+      attr: { type: 'submit', class: 'button-apply' },
     }),
     attr: { class: 'form password-edit-form' },
+    
   }),
 
   link: new Link({

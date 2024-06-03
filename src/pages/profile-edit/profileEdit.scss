@@ -1,11 +1,3 @@
-// .profile-edit-wrap {
-// height: 550px;
-// display: flex;
-// flex-direction: column;
-// justify-content: space-between;
-// align-items: center;
-// }
-
 .profile-wrap {
   display: flex;
 }
@@ -54,12 +46,7 @@
 }
 
 .form-data-row input:active,
-.form-data-row input:active,
 .form-data-row input:focus {
   outline: 0;
   outline-offset: 0;
 }
-
-// .form-profile-edit {
-//   // height: 365px;
-// }

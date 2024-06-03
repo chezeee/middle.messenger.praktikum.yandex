@@ -5,6 +5,9 @@ import Input from '../../../components/input';
 import Form from '../../../components/form';
 import Button from '../../../components/button';
 import Link from '../../../components/link';
+import * as REGEXP from '../../../constants/consts-regexp';
+import { inputValidate, comparePasswords } from '../../../utils/inputValidate';
+
 import './registration.scss';
 
 const formFields = [
@@ -14,6 +17,14 @@ const formFields = [
     name: 'email',
     placeholder: 'почту',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'email') {
+          inputValidate(input.value, REGEXP.EMAIL_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Логин',
@@ -21,6 +32,14 @@ const formFields = [
     name: 'login',
     placeholder: 'логин',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'login') {
+          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Имя',
@@ -28,6 +47,14 @@ const formFields = [
     name: 'first_name',
     placeholder: 'имя',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'first_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Фамилия',
@@ -35,6 +62,14 @@ const formFields = [
     name: 'second_name',
     placeholder: 'фамилию',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'second_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Телефон',
@@ -42,6 +77,14 @@ const formFields = [
     name: 'phone',
     placeholder: 'телефон',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'phone') {
+          inputValidate(input.value, REGEXP.PHONE_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Пароль',
@@ -49,6 +92,14 @@ const formFields = [
     name: 'password',
     placeholder: 'пароль',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'password') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        }
+      },
+    },
   }),
   new Input({
     label: 'Пароль (ещё раз)',
@@ -56,6 +107,14 @@ const formFields = [
     name: 'password_repeat',
     placeholder: 'пароль ещё раз',
     attr: { class: 'form-input-wrap' },
+    events: {
+      change: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'password_repeat') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        }
+      },
+    },
   }),
 ];
 
@@ -73,9 +132,104 @@ export const RegistrationPage = new Registration('section', {
     formFields,
     button: new Button({
       text: 'Создать аккаунт',
-      attr: { type: 'submit', class: 'buttonApply' },
+      attr: { type: 'submit', class: 'button-apply' },
     }),
     attr: { class: 'auth-form-reg' },
+    events: {
+      submit: (evt) => {
+        evt.preventDefault();
+
+        let result: boolean = true;
+        let output: Record<string, string> = {};
+        const inputs = (evt.target as HTMLElement)?.querySelectorAll('input');
+
+        inputs.forEach((input) => {
+          switch (input.name) {
+            case 'email':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.EMAIL_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'login':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.LOGIN_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'first_name':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.NAME_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'second_name':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.NAME_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'phone':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.PHONE_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'password':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'password_repeat':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input) &&
+                comparePasswords(
+                  (
+                    document.querySelector(
+                      `[name="password"]`
+                    ) as HTMLInputElement
+                  )?.value,
+                  input.value,
+                  input
+                )
+              ) {
+                break;
+              }
+              result = false;
+              break;
+          }
+        });
+
+        if (result) {
+          inputs.forEach((input) => {
+            output[`${input.name}`] = input.value;
+          });
+
+          console.log('Registration User data: ', output);
+        }
+        return;
+      },
+    },
   }),
 
   link: new Link({

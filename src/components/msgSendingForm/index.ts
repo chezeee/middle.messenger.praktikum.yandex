@@ -8,8 +8,6 @@ export default class MsgSendingForm extends Component {
   }
 
   render() {
-    console.log('render ContentForm');
-
     return this.compile(template, this.props);
   }
 }

@@ -5,7 +5,6 @@
   overflow-y: scroll;
   background-color: #fbfbfb;
   border-right: 1px solid #eaeaea;
-
   -ms-overflow-style: none; /* IE и Edge */
   scrollbar-width: none;
 }
@@ -18,5 +17,5 @@
 .chat-list-header {
   display: flex;
   justify-content: space-between;
-  padding: 0 10px 18px 10px;
+  padding: 0 10px 18px;
 }

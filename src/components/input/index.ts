@@ -1,6 +1,5 @@
 import Component, { ComponentProps } from '../../services/Component';
 import template from './template.hbs?raw';
-import './input.scss';
 
 export default class Input extends Component {
   constructor(props: ComponentProps) {

@@ -39,7 +39,6 @@ export default class Component {
     this._lists = this._makePropsProxy(lists);
     this._registerEvents(this._eventBus);
     this._eventBus.emit(Component.EVENTS.INIT);
-    // this.props.attr = { id: this._id };
   }
 
   get element() {
@@ -103,7 +102,6 @@ export default class Component {
       return;
     }
     this._render();
-    // return response;
   }
 
   // Может переопределять пользователь, необязательно трогать

@@ -5,13 +5,7 @@
   align-items: center;
   padding: 30px;
   border-radius: 12px;
-  box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.14);
-
-  // .form {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-between;
-  //   margin: 0 0 13px;
+  box-shadow: 0 0 6px rgb(0 0 0 / 14%);
 
   .fields {
     display: flex;
@@ -19,29 +13,4 @@
     justify-content: space-between;
     gap: 16px;
   }
-  // }
-
-  // .section-wrap div {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: space-between;
-  //   gap: 16px;
-  // }
-
-  // }
 }
-
-// .section-wrap:first-child {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   gap: 16px;
-// }
-
-// .profile-wrap {
-//   display: flex;
-//   flex-direction: column;
-//   justify-content: space-between;
-//   height: 551px;
-//   align-items: center;
-// }

@@ -92,7 +92,7 @@ export const ProfilePage = new Profile('section', {
   button: new Button({
     attr: {
       type: 'button',
-      class: 'buttonReturn',
+      class: 'button-return',
       onclick: "window.location='/chat'",
     },
   }),

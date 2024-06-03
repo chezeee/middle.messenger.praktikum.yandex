@@ -5,8 +5,7 @@
   align-items: center;
   font-weight: 500;
   min-height: 100vh;
-  
-  font-family: 'Inter', sans-serif;
+  font-family: Inter, sans-serif;
   color: #1e1e1e;
 }
 
@@ -14,4 +13,16 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+.error-validate {
+  border: 1px solid red;
+  color: rgb(171 0 0);
+}
+
+.error-validate-message {
+  color: red;
+  padding: 4px;
+  font-size: 9px;
+  z-index: 1;
 }
