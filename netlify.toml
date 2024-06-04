@@ -13,4 +13,4 @@
 [[redirects]]
   from = "/*"
   to = "/index.html"
-  status = 200Globalsettingsappliedtothewholesite.“base”isthedirectorytochangetobeforestartingbuild.Ifyousetbase
+  status = 200
