@@ -7,6 +7,9 @@ import Button from '../../components/button';
 import Link from '../../components/link';
 import Avatar from '../../components/avatar';
 import Modal from '../../components/modal';
+import * as REGEXP from '../../constants/consts-regexp';
+import { inputValidate } from '../../utils/inputValidate';
+
 import './profileEdit.scss';
 
 const modalAvatar = new Modal({ content: 'Смена аватара!' });
@@ -91,6 +94,99 @@ export const ProfileEditPage = new ProfileEdit('section', {
       attr: { type: 'submit', class: 'button-apply' },
     }),
     attr: { class: 'form profile-edit-form' },
+    events: {
+      blur: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'email') {
+          inputValidate(input.value, REGEXP.EMAIL_REGEXP, input);
+        } else if (input.name === 'login') {
+          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
+        } else if (input.name === 'first_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        } else if (input.name === 'second_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        } else if (input.name === 'display_name') {
+          inputValidate(input.value, REGEXP.PHONE_REGEXP, input);
+        } else if (input.name === 'phone') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        }
+      },
+      submit: (evt) => {
+        evt.preventDefault();
+
+        let result: boolean = true;
+        const output: Record<string, string> = {};
+        const inputs = (evt.target as HTMLElement)?.querySelectorAll('input');
+
+        inputs.forEach((input) => {
+          switch (input.name) {
+            case 'email':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.EMAIL_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'login':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.LOGIN_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'first_name':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.NAME_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'second_name':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.NAME_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'display_name':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.NAME_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+            case 'phone':
+              if (
+                input.value !== '' &&
+                inputValidate(input.value, REGEXP.PHONE_REGEXP, input)
+              ) {
+                break;
+              }
+              result = false;
+              break;
+          }
+        });
+
+        if (result) {
+          inputs.forEach((input) => {
+            output[`${input.name}`] = input.value;
+          });
+
+          console.log('Edit user data: ', output);
+        }
+        return;
+      },
+    },
   }),
 
   link: new Link({

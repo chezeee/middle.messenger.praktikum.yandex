@@ -17,14 +17,6 @@ const formFields = [
     name: 'email',
     placeholder: 'почту',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'email') {
-          inputValidate(input.value, REGEXP.EMAIL_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Логин',
@@ -32,14 +24,6 @@ const formFields = [
     name: 'login',
     placeholder: 'логин',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'login') {
-          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Имя',
@@ -47,14 +31,6 @@ const formFields = [
     name: 'first_name',
     placeholder: 'имя',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'first_name') {
-          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Фамилия',
@@ -62,14 +38,6 @@ const formFields = [
     name: 'second_name',
     placeholder: 'фамилию',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'second_name') {
-          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Телефон',
@@ -77,44 +45,20 @@ const formFields = [
     name: 'phone',
     placeholder: 'телефон',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'phone') {
-          inputValidate(input.value, REGEXP.PHONE_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Пароль',
-    type: 'text',
+    type: 'password',
     name: 'password',
     placeholder: 'пароль',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'password') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Пароль (ещё раз)',
-    type: 'text',
+    type: 'password',
     name: 'password_repeat',
     placeholder: 'пароль ещё раз',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'password_repeat') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        }
-      },
-    },
   }),
 ];
 
@@ -136,6 +80,24 @@ export const RegistrationPage = new Registration('section', {
     }),
     attr: { class: 'auth-form-reg' },
     events: {
+      blur: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'email') {
+          inputValidate(input.value, REGEXP.EMAIL_REGEXP, input);
+        } else if (input.name === 'login') {
+          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
+        } else if (input.name === 'first_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        } else if (input.name === 'second_name') {
+          inputValidate(input.value, REGEXP.NAME_REGEXP, input);
+        } else if (input.name === 'phone') {
+          inputValidate(input.value, REGEXP.PHONE_REGEXP, input);
+        } else if (input.name === 'password') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        } else if (input.name === 'password_repeat') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        }
+      },
       submit: (evt) => {
         evt.preventDefault();
 

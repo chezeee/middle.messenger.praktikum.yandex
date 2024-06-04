@@ -18,14 +18,6 @@ const formFields = [
     name: 'login',
     placeholder: 'логин',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'login') {
-          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
-        }
-      },
-    },
   }),
   new Input({
     label: 'Пароль',
@@ -33,14 +25,6 @@ const formFields = [
     name: 'password',
     placeholder: 'пароль',
     attr: { class: 'form-input-wrap' },
-    events: {
-      change: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'password') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        }
-      },
-    },
   }),
 ];
 
@@ -62,6 +46,14 @@ export const LoginPage = new Login('section', {
     }),
     attr: { class: 'auth-form-login' },
     events: {
+      blur: (evt) => {
+        const input = evt.target as HTMLInputElement;
+        if (input.name === 'password') {
+          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+        } else if (input.name === 'login') {
+          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
+        }
+      },
       submit: (evt) => {
         evt.preventDefault();
 
