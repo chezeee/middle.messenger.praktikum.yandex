@@ -8,6 +8,8 @@ import Message from '../../components/message';
 import Button from '../../components/button';
 import MsgSendingForm from '../../components/msgSendingForm';
 import data from '../../data.json';
+import { inputValidate } from '../../utils/inputValidate';
+import { MESSAGE_REGEXP } from '../../constants/consts-regexp';
 
 import './chat.scss';
 
@@ -43,28 +45,35 @@ const contentForm = new ContentForm({
     ButtonSubmit: new Button({
       type: 'submit',
       text: 'Отправить',
-      events: {
-        click: (evt: Event) => {
-          evt.preventDefault();
-          const date = new Date();
-          const content = (
-            document.querySelector(
-              '.sending-form__message'
-            ) as HTMLTextAreaElement
-          )?.value;
-          data.chat.chatList.forEach((chat) => {
-            if (chat.id === contentForm.props.idActiveChat && content !== '') {
-              chat.messages.push({
-                outgoing: true,
-                date: `${date.getHours()}:${date.getMinutes()}`,
-                content: content,
-              });
-            }
-            return;
-          });
-        },
-      },
     }),
+    events: {
+      submit: (evt) => {
+        evt.preventDefault();
+        const date = new Date();
+        const textArea = (
+          document.querySelector(
+            '.sending-form__message'
+          ) as HTMLTextAreaElement
+        );
+        data.chat.chatList.forEach((chat) => {
+          if (chat.id === contentForm.props.idActiveChat && 
+            inputValidate(textArea.value, MESSAGE_REGEXP, textArea)) {
+            chat.messages.push({
+              outgoing: true,
+              date: `${date.getHours()}:${date.getMinutes()}`,
+              content: textArea.value,
+            });
+            console.log({
+              'content': textArea.value, 
+              "outgoing": true, 
+              "date": `${date.getHours()}:${date.getMinutes()}`,
+            });
+          }
+          textArea.value = '';
+          return;
+        });
+      },
+    },
   }),
 });
 const chatCards: Component[] = data.chat.chatList.map(
@@ -106,7 +115,6 @@ const chatCards: Component[] = data.chat.chatList.map(
       },
     })
 );
-// chatCards;
 
 class Chat extends Component {
   render() {
