@@ -10,8 +10,8 @@ const pages: Record<string, Component> = {
   profile: Pages.ProfilePage,
   passwordEdit: Pages.PasswordEditPage,
   profileEdit: Pages.ProfileEditPage,
-  // error404: [Pages.Error404],
-  // error500: [Pages.Error500],
+  error404: Pages.Error404Page,
+  error500: Pages.Error500Page,
 };
 
 document.addEventListener('DOMContentLoaded', (event: Event) => {

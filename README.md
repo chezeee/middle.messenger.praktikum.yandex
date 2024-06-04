@@ -12,12 +12,14 @@
 
 ## Технологии, используемые в процессе; разработки:
 
-- JavaScript
+- TypeScript
 - Vite
 - Handlebars
 - SCSS
 - Express
 - Netlify
+- ESLint
+- StyleLint
 
 ## Дизайн
 
