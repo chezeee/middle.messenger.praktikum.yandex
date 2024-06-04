@@ -140,7 +140,7 @@ export const RegistrationPage = new Registration('section', {
         evt.preventDefault();
 
         let result: boolean = true;
-        let output: Record<string, string> = {};
+        const output: Record<string, string> = {};
         const inputs = (evt.target as HTMLElement)?.querySelectorAll('input');
 
         inputs.forEach((input) => {

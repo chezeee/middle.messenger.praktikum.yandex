@@ -6,7 +6,7 @@ import Form from '../../../components/form';
 import Button from '../../../components/button';
 import Link from '../../../components/link';
 import * as REGEXP from '../../../constants/consts-regexp';
-import {inputValidate} from '../../../utils/inputValidate';
+import { inputValidate } from '../../../utils/inputValidate';
 
 import '../auth.scss';
 import './login.scss';
@@ -22,10 +22,7 @@ const formFields = [
       change: (evt) => {
         const input = evt.target as HTMLInputElement;
         if (input.name === 'login') {
-          console.log(
-            `Validate ${input.name} value: `,
-            inputValidate(input.value, REGEXP.LOGIN_REGEXP, input)
-          );
+          inputValidate(input.value, REGEXP.LOGIN_REGEXP, input);
         }
       },
     },
@@ -69,7 +66,7 @@ export const LoginPage = new Login('section', {
         evt.preventDefault();
 
         let result: boolean = true;
-        let output: Record<string, string> = {};
+        const output: Record<string, string> = {};
         const inputs = (evt.target as HTMLElement)?.querySelectorAll('input');
 
         inputs.forEach((input) => {
@@ -101,7 +98,6 @@ export const LoginPage = new Login('section', {
 
           console.log('Login User data: ', output);
         }
-        return;
       },
     },
   }),

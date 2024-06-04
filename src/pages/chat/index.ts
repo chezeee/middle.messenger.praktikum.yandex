@@ -31,9 +31,10 @@ import './chat.scss';
 //   );
 // });
 // console.log('chatCards', chatCards);
-// Не удаётся отрендерить массив компонентов "chatCards", полученный через GET запрос из data.json. (реализовал закомментированным кодом выше)
+// Не удаётся отрендерить массив компонентов "chatCards", полученный через GET запрос из data.json.
+//(реализовал закомментированным кодом выше)
 // Возможно проблема с ассинхронным получением данных, но с её решением не успел разобраться.
-let contentForm = new ContentForm({
+const contentForm = new ContentForm({
   buttonChatOpts: new Button({ text: 'Опции' }),
   msgSendingForm: new MsgSendingForm({
     buttonAttachment: new Button({ type: 'button', text: 'Прикрепить' }),
@@ -67,8 +68,8 @@ let contentForm = new ContentForm({
   }),
 });
 const chatCards: Component[] = data.chat.chatList.map(
-  ({ id, title, messages }) => {
-    return new ChatCard({
+  ({ id, title, messages }) =>
+    new ChatCard({
       title: title,
       date: messages[messages.length - 1].date,
       lastMessage: messages[messages.length - 1].content,
@@ -103,10 +104,9 @@ const chatCards: Component[] = data.chat.chatList.map(
           });
         },
       },
-    });
-  }
+    })
 );
-chatCards;
+// chatCards;
 
 class Chat extends Component {
   render() {

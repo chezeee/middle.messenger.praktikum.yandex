@@ -1,3 +1,7 @@
 /dist
 **/*.min.js
 /node_modules 
+"public/**/*",
+"**/*.md",
+"**/*.toml"
+  

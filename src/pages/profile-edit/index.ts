@@ -79,7 +79,7 @@ export const ProfileEditPage = new ProfileEdit('section', {
       onclick: "window.location='/profile'",
     },
   }),
-  avatar: avatar,
+  avatar,
   modal: modalAvatar,
   title: new Title({
     text: '',

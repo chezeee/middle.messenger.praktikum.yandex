@@ -1,6 +1,6 @@
-import EventBus from './EventBus';
 import { v4 } from 'uuid';
 import Handlebars from 'handlebars';
+import EventBus from './EventBus';
 
 type ObjectTypes = Record<string, unknown>;
 type Events = Record<string, (event: Event | never) => void>;
@@ -19,11 +19,17 @@ export default class Component {
   };
 
   props: ComponentProps;
+
   _children: ObjectTypes;
+
   _lists: ObjectTypes;
+
   _element: HTMLElement;
+
   _id: string;
+
   _eventBus: EventBus;
+
   _tagName: keyof HTMLElementTagNameMap;
 
   constructor(
@@ -247,7 +253,7 @@ export default class Component {
   }
 
   _createDocumentElement(tagName?: keyof HTMLElementTagNameMap): HTMLElement {
-    return document.createElement(tagName ? tagName : 'div');
+    return document.createElement(tagName || 'div');
   }
 
   show() {
