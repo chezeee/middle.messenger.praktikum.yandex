@@ -12,14 +12,16 @@
 
 **Проект находится в разработке**
 
-## Технологии, используемые в процессе разработки:
+## Технологии, используемые в процессе; разработки:
 
-- JavaScript
+- TypeScript
 - Vite
 - Handlebars
 - SCSS
 - Express
 - Netlify
+- ESLint
+- StyleLint
 
 ## Дизайн
 
@@ -46,13 +48,13 @@
 
 ## **Установка и использование проекта локально**
 
-```git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git``` - клонирование проекта в локальный репозиторий;
+`git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git` - клонирование проекта в локальный репозиторий;
 
-```npm install``` — установка зависимостей;
+`npm install` — установка зависимостей;
 
-```npm run build``` — сборка стабильной версии.
+`npm run build` — сборка стабильной версии.
 
-```npm run start``` — сборка и запуск на 3000 порту версии для разработчика;
+`npm run start` — сборка и запуск на 3000 порту версии для разработчика;
 
 ### **URL страниц для просмотра в режиме разработки**
 

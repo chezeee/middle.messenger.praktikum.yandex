@@ -1,10 +1,16 @@
 .avatar {
+  text-align: center;
   display: inline-block;
   position: relative;
-  width: 130px;
-  height: 130px;
+  width: 100%;
   border-radius: 50%;
   background: transparent;
   object-fit: cover;
+  
+}
+
+.avatar img {
+  width: 130px;
+  height: 130px;
   cursor: pointer;
 }

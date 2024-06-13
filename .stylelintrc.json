@@ -1,0 +1,16 @@
+{
+  "extends": "stylelint-config-standard",
+  "ignoreFiles": [
+    "dist/*",
+    "public/**/*",
+    "node_modules/*",
+    "**/*.d.ts",
+    "**/*.hbs",
+    "**/*.ts",
+    "**/*.js",
+    "**/*.json",
+    "**/*.html",
+    "**/*.md",
+    "**/*.toml"
+  ]
+}
