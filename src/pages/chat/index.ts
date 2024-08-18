@@ -50,23 +50,23 @@ const contentForm = new ContentForm({
       submit: (evt) => {
         evt.preventDefault();
         const date = new Date();
-        const textArea = (
-          document.querySelector(
-            '.sending-form__message'
-          ) as HTMLTextAreaElement
-        );
+        const textArea = document.querySelector(
+          '.sending-form__message'
+        ) as HTMLTextAreaElement;
         data.chat.chatList.forEach((chat) => {
-          if (chat.id === contentForm.props.idActiveChat && 
-            inputValidate(textArea.value, MESSAGE_REGEXP, textArea)) {
+          if (
+            chat.id === contentForm.props.idActiveChat &&
+            inputValidate(textArea.value, MESSAGE_REGEXP, textArea)
+          ) {
             chat.messages.push({
               outgoing: true,
               date: `${date.getHours()}:${date.getMinutes()}`,
               content: textArea.value,
             });
             console.log({
-              'content': textArea.value, 
-              "outgoing": true, 
-              "date": `${date.getHours()}:${date.getMinutes()}`,
+              content: textArea.value,
+              outgoing: true,
+              date: `${date.getHours()}:${date.getMinutes()}`,
             });
           }
           textArea.value = '';
@@ -116,22 +116,23 @@ const chatCards: Component[] = data.chat.chatList.map(
     })
 );
 
-class Chat extends Component {
+export default class ChatPage extends Component {
+  constructor() {
+    super('section', {
+      chatList: new ChatList({
+        buttonCreate: new Button({ text: 'Создать чат' }),
+        buttonMyProfile: new Button({
+          type: 'button',
+          text: 'Мой профиль',
+          attr: { onclick: "window.location='/profile'" },
+        }),
+        chatCards: chatCards,
+      }),
+
+      contentForm: contentForm,
+    });
+  }
   render() {
     return this.compile(template, this.props);
   }
 }
-
-export const ChatPage = new Chat('section', {
-  chatList: new ChatList({
-    buttonCreate: new Button({ text: 'Создать чат' }),
-    buttonMyProfile: new Button({
-      type: 'button',
-      text: 'Мой профиль',
-      attr: { onclick: "window.location='/profile'" },
-    }),
-    chatCards: chatCards,
-  }),
-
-  contentForm: contentForm,
-});

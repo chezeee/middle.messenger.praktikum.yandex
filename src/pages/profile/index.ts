@@ -82,29 +82,30 @@ const profileOptions = [
   }),
 ];
 
-class Profile extends Component {
+export default class ProfilePage extends Component {
+  constructor() {
+    super('section', {
+      button: new Button({
+        attr: {
+          type: 'button',
+          class: 'button-return',
+          onclick: "window.location='/chat'",
+        },
+      }),
+      avatar: avatar,
+      title: new Title({
+        text: 'Илья Ялымов',
+      }),
+      form: new Form({
+        formFields,
+        button: '',
+        attr: { class: 'form profile-form' },
+      }),
+
+      profileOptions,
+    });
+  }
   render() {
     return this.compile(template, this.props);
   }
 }
-
-export const ProfilePage = new Profile('section', {
-  button: new Button({
-    attr: {
-      type: 'button',
-      class: 'button-return',
-      onclick: "window.location='/chat'",
-    },
-  }),
-  avatar: avatar,
-  title: new Title({
-    text: 'Илья Ялымов',
-  }),
-  form: new Form({
-    formFields,
-    button: '',
-    attr: { class: 'form profile-form' },
-  }),
-
-  profileOptions,
-});

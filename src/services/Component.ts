@@ -19,17 +19,11 @@ export default class Component {
   };
 
   props: ComponentProps;
-
   _children: ObjectTypes;
-
   _lists: ObjectTypes;
-
   _element: HTMLElement;
-
   _id: string;
-
   _eventBus: EventBus;
-
   _tagName: keyof HTMLElementTagNameMap;
 
   constructor(
