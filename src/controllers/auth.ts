@@ -14,18 +14,14 @@ const signUp = async (data: UserModel) => {
   if (isResponseError(response)) {
     throw new Error(response.data.reason);
   }
-  // await getUserData();
 };
 
 const signIn = async (data: SignInRequestModel) => {
   const response = await authAPI.signIn(data);
 
-  // alert(response?.status);
-
   if (isResponseError(response)) {
     throw new Error(response.data.reason);
   }
-  // await getUserData();
 };
 
 const getUserData = async (): Promise<ResultType<UserModel>> => {
@@ -36,7 +32,6 @@ const getUserData = async (): Promise<ResultType<UserModel>> => {
   }
   console.log(`Response_data`, response);
   return response;
-  // window.store.set({ user: response.data as UserModel });
 };
 
 const logout = async () => {

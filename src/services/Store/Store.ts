@@ -1,25 +1,25 @@
 import EventBus from '../EventBus.ts';
-// import set from '../../helpers/set.ts';
-import { UserModel } from '../../models/UserModel.ts';
-import { ResultType } from '../../utils/HTTPTransport.ts';
-
-export type StateType = {
-  user: UserModel | null | ResultType<UserModel>;
-};
+import { StateModel } from '../../models/StateModel.ts';
 
 export enum StoreEvents {
   Updated = 'updated',
 }
 
-const initState: StateType = {
+const initState: StateModel = {
+  error: null,
   user: null,
+  chats: [],
+  chatId: null,
 };
 
 class Store extends EventBus {
   // static _instance: Store;
 
-  private _state: StateType = {
+  private _state: StateModel = {
+    error: null,
     user: null,
+    chats: [],
+    chatId: null,
   };
 
   constructor() {
@@ -30,15 +30,13 @@ class Store extends EventBus {
     });
   }
 
-  public getState(): StateType {
+  public getState(): StateModel {
     return this._state;
   }
 
-  public set<T extends keyof StateType>(path: T, value: StateType[T]) {
-    // set(this._state, path, value);
+  public set<T extends keyof StateModel>(path: T, value: StateModel[T]) {
     this._state[path] = value;
     this.emit(StoreEvents.Updated);
-
     // const oldState = { ...this.state };
     // this.state = { ...oldState, ...newState };
   }

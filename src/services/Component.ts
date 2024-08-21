@@ -137,26 +137,32 @@ export default class Component {
     if (this.props.attr) {
       Object.entries(this.props.attr).forEach(
         ([key, value]: [string, string]) => {
-          this._element.setAttribute(key, value);
+          this.element.setAttribute(key, value);
         }
       );
     }
   }
 
+  addEvents() {}
+
   _addEvents() {
     const { events = {} } = this.props;
 
     Object.keys(events).forEach((eventName) => {
-      this._element.addEventListener(eventName, events[eventName], true);
+      this.element.addEventListener(eventName, events[eventName], true);
     });
+
+    this.addEvents();
   }
 
+  removeEvents() {}
+
   _removeEvents() {
-    const { events } = this.props;
+    const { events = {} } = this.props;
 
     if (events) {
       Object.keys(events).forEach((eventName) => {
-        this._element.removeEventListener(eventName, events[eventName]);
+        this.element.removeEventListener(eventName, events[eventName]);
       });
     }
   }
@@ -221,7 +227,7 @@ export default class Component {
   }
 
   getContent() {
-    return this._element;
+    return this.element;
   }
 
   _makePropsProxy(props: ObjectTypes) {
@@ -251,10 +257,10 @@ export default class Component {
   }
 
   show() {
-    this.getContent().style.display = 'block';
+    this.element.style.display = 'block';
   }
 
   hide() {
-    this.getContent().style.display = 'none';
+    this.element.style.display = 'none';
   }
 }

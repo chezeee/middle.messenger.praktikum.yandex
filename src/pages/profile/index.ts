@@ -7,6 +7,7 @@ import Form from '../../components/form';
 import Button from '../../components/button';
 import Link from '../../components/link';
 import './profile.scss';
+import router from '../../services/Router/Router';
 
 const avatar = new Avatar({});
 
@@ -67,12 +68,12 @@ const formFields = [
 const profileOptions = [
   new Link({
     text: 'Изменить данные',
-    href: '/profile-edit',
+    href: '/settings/profile-edit',
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
     text: 'Изменить пароль',
-    href: '/password-edit',
+    href: '/settings/password-edit',
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
@@ -89,7 +90,11 @@ export default class ProfilePage extends Component {
         attr: {
           type: 'button',
           class: 'button-return',
-          onclick: "window.location='/chat'",
+        },
+        events: {
+          click: () => {
+            router.go('/messenger');
+          },
         },
       }),
       avatar: avatar,

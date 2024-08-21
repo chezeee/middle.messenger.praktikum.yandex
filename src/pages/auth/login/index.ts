@@ -94,7 +94,6 @@ export default class LoginPage extends Component {
               try {
                 await signIn(output);
                 const user = await getUserData();
-                console.log('User data: ', user);
                 setUserState(user);
 
                 console.log('STATE: ', store.getState());

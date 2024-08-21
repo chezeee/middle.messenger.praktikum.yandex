@@ -34,8 +34,20 @@ export type GetChatsParamsModel = {
   title: string;
 };
 
+
+
 export type DeleteChatModel = {
   chatId: number;
+};
+
+export type DeleteChatResponseModel = {
+  userId: number;
+  result: {
+    id: number;
+    title: string;
+    avatar: string;
+    created_by: number;
+  };
 };
 
 export type DeleteUsersModel = {
@@ -43,6 +55,6 @@ export type DeleteUsersModel = {
   chatId: number;
 };
 
-export type GetChatUsersResponseModel = {
+export type GetChatTokenResponseModel = {
   token: string;
 };

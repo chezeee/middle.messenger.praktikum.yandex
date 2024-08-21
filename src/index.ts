@@ -47,15 +47,15 @@ router
   .use('/login', LoginPage)
   .use('/registration', RegistrationPage)
   .use('/messenger', ChatPage)
-  .use('/profile', ProfilePage)
-  .use('/profileEdit', ProfileEditPage)
-  .use('/passwordEdit', PasswordEditPage)
+  .use('/settings', ProfilePage)
+  .use('/settings/profile-edit', ProfileEditPage)
+  .use('/settings/password-edit', PasswordEditPage)
   .use('/error404', Error404Page)
   .use('/error500', Error500Page)
   .start();
-  
+
 // if (router.getCurrentRoute() === '/' || '/login' || '/registration') {
-  
+
 // }
 
 // document.addEventListener('DOMContentLoaded', (event: Event) => {

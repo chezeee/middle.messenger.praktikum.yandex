@@ -10,6 +10,7 @@ import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate, comparePasswords } from '../../utils/inputValidate';
 
 import './passwordEdit.scss';
+import router from '../../services/Router/Router';
 
 const avatar = new Avatar({});
 
@@ -44,7 +45,11 @@ export default class PasswordEditPage extends Component {
         attr: {
           type: 'button',
           class: 'button-return',
-          onclick: "window.location='/profile'",
+        },
+        events: {
+          click: () => {
+            router.go('/settings');
+          },
         },
       }),
       avatar: avatar,

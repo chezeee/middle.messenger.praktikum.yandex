@@ -11,6 +11,7 @@ import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate } from '../../utils/inputValidate';
 
 import './profileEdit.scss';
+import router from '../../services/Router/Router';
 
 const modalAvatar = new Modal({ content: 'Смена аватара!' });
 
@@ -75,7 +76,11 @@ export default class ProfileEditPage extends Component {
         attr: {
           type: 'button',
           class: 'button-return',
-          onclick: "window.location='/profile'",
+        },
+        events: {
+          click: () => {
+            router.go('/settings');
+          },
         },
       }),
       avatar,

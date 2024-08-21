@@ -9,7 +9,6 @@ export default class AuthAPI extends BaseAPI {
     data: UserModel
   ): Promise<ResultType<SignUpResponseModel | BadRequestModel>> {
     return baseHTTPTransport.post<SignUpResponseModel>('/auth/signup', {
-      // headers: { 'Content-type': 'application/json' },
       data: data,
     });
   }
@@ -22,7 +21,6 @@ export default class AuthAPI extends BaseAPI {
     data: SignInRequestModel
   ): Promise<ResultType<unknown | BadRequestModel>> {
     return baseHTTPTransport.post('/auth/signin', {
-      // headers: { 'Content-type': 'application/json' },
       data: data,
     });
   }

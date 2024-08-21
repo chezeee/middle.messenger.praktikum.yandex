@@ -1,7 +1,12 @@
-import { store, StateType } from './Store';
+import { StateModel } from '../../models/StateModel';
+import { store } from './Store';
 
-const setUserState = (user: StateType['user']) => {
+const setUserState = (user: StateModel['user']) => {
   store.set('user', user);
 };
 
-export { setUserState };
+const setChatsState = (chats: StateModel['chats']) => {
+  store.set('chats', chats);
+};
+
+export { setUserState, setChatsState };
