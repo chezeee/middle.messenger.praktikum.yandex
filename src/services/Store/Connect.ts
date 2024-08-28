@@ -1,23 +1,26 @@
-// function connect(Component: typeof Block, mapStateToProps: (state: Indexed) => Indexed) {
-//   // используем class expression
-// return class extends Component {
-//   constructor(props) {
-//     super({...props, ...mapStateToProps(store.getState())});
+import { StateModel } from '../../models/StateModel';
+import Component, { ComponentProps } from '../Component';
+import { store, StoreEvents } from './Store';
 
-//     // подписываемся на событие
-//       store.on(StoreEvents.Updated, () => {
-//         // вызываем обновление компонента, передав данные из хранилища
-//         this.setProps({...mapStateToProps(store.getState())});
-//           });
-//   }
-// } 
-// }
+export type ComponentWithStoreProps = ComponentProps & Partial<StateModel>;
 
-// function mapUserToProps(state) {
-// return {
-//   name: state.user.name,
-//   avatar: state.user.avatar,
-// };
-// }
+export const Connect = (
+  Block: typeof Component,
+  mapStateToProps: (state: StateModel) => Record<string, unknown>
+) => {
+  return class extends Block {
+    constructor(
+      tagName?: keyof HTMLElementTagNameMap,
+      propsAndChildren: ComponentWithStoreProps = {}
+    ) {
+      super(tagName, {
+        ...propsAndChildren,
+        ...mapStateToProps(store.getState()),
+      });
 
-// export connect(UserProfile, mapUserToProps); 
+      store.on(StoreEvents.Updated, () => {
+        this.setProps({ ...mapStateToProps(store.getState()) });
+      });
+    }
+  };
+};

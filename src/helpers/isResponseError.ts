@@ -1,11 +1,11 @@
-import { ResultType } from '../utils/HTTPTransport';
+// import { ResultType } from '../utils/HTTPTransport';
 import router from '../services/Router/Router';
 import { BadRequestModel } from '../models/ErrorModel';
 
 export default function isResponseError(
-  response: ResultType<unknown>
-): response is ResultType<BadRequestModel> {
-  switch (response.status) {
+  response: unknown
+): response is BadRequestModel {
+  switch (response) {
     case 200:
       return false;
     case 500:

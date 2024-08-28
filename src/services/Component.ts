@@ -7,7 +7,7 @@ type Events = Record<string, (event: Event | never) => void>;
 
 export type ComponentProps = ObjectTypes & {
   events?: Events;
-  attrs?: { class?: string } & Record<string, string>;
+  attr?: { class?: string } & Record<string, string>;
 };
 
 export default class Component {
@@ -24,7 +24,7 @@ export default class Component {
   _element: HTMLElement;
   _id: string;
   _eventBus: EventBus;
-  _tagName: keyof HTMLElementTagNameMap;
+  tagName: keyof HTMLElementTagNameMap;
 
   constructor(
     tagName: keyof HTMLElementTagNameMap = 'div',
@@ -32,7 +32,7 @@ export default class Component {
   ) {
     const { props, children, lists } = this._getChildren(propsAndChilds);
     this._eventBus = new EventBus();
-    this._tagName = tagName;
+    this.tagName = tagName;
     this._id = v4();
     this.props = this._makePropsProxy({ ...props, id: this._id });
     this._children = this._makePropsProxy(children);
@@ -71,7 +71,7 @@ export default class Component {
   }
 
   _createResources() {
-    const element = this._createDocumentElement(this._tagName);
+    const element = this._createDocumentElement(this.tagName);
     this._element = element;
   }
 

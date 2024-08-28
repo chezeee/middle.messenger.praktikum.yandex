@@ -7,14 +7,15 @@ import Button from '../../../components/button';
 import Link from '../../../components/link';
 import * as REGEXP from '../../../constants/consts-regexp';
 import { inputValidate } from '../../../utils/inputValidate';
-import { getUserData, logout, signIn } from '../../../controllers/auth';
+import { getUserData, signIn } from '../../../controllers/auth';
 import { SignInRequestModel } from '../../../models/AuthModel';
+import { setChatsState, setUserState } from '../../../services/Store/Actions';
+import router from '../../../services/Router/Router';
+import { getChats } from '../../../controllers/chat';
+import { ChatModel } from '../../../models/ChatModel';
 
 import '../auth.scss';
 import './login.scss';
-import router from '../../../services/Router/Router';
-import { setUserState } from '../../../services/Store/Actions';
-import { store } from '../../../services/Store/Store';
 
 const formFields = [
   new Input({
@@ -32,6 +33,10 @@ const formFields = [
     attr: { class: 'form-input-wrap' },
   }),
 ];
+
+// if (store.getStateKey('user')) {
+//   logout();
+// }
 
 export default class LoginPage extends Component {
   constructor() {
@@ -95,41 +100,34 @@ export default class LoginPage extends Component {
                 await signIn(output);
                 const user = await getUserData();
                 setUserState(user);
-
-                console.log('STATE: ', store.getState());
-
+                setChatsState((await getChats()) as ChatModel[]);
                 router.go('/messenger');
               } catch (error) {
                 console.error('Error: ', error.message);
+                alert(
+                  'Не удалось авторизоваться. Логин или пароль указаны неверно'
+                );
               }
             }
-            // try {
-            //   await signIn(output);
-            //   const user = await getUserData();
-            //   console.log('User data: ', user);
-            //   // setCurrentUser(user);
-
-            //   router.go('/chat');
-            // } catch (error) {
-            //   console.error("Error: ", error.message);
-            //   // alert(error.reason);
-            // }
           },
         },
       }),
 
       link: new Link({
         text: 'Вы ещё не зарегистрированы?',
-        href: '/registration',
+        href: '/sign-up',
         attr: { class: 'link' },
+        events: {
+          click: async () => {
+            router.go('/sign-up');
+          },
+        },
       }),
       attr: { class: 'section-wrap login' },
     });
   }
 
   render() {
-    logout();
-
     return this.compile(template, this.props);
   }
 }

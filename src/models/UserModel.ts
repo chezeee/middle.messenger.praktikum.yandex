@@ -15,3 +15,7 @@ export type PasswordRequestModel = {
   oldPassword: string;
   newPassword: string;
 };
+
+export type UserRequestByLoginModel = {
+  login: string;
+};

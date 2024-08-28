@@ -1,5 +1,4 @@
 import BaseAPI, { baseHTTPTransport } from './base-api';
-import { ResultType } from '../utils/HTTPTransport';
 import { UserModel } from '../models/UserModel';
 import { SignInRequestModel, SignUpResponseModel } from '../models/AuthModel';
 import { BadRequestModel } from '../models/ErrorModel';
@@ -7,25 +6,23 @@ import { BadRequestModel } from '../models/ErrorModel';
 export default class AuthAPI extends BaseAPI {
   async signUp(
     data: UserModel
-  ): Promise<ResultType<SignUpResponseModel | BadRequestModel>> {
+  ): Promise<SignUpResponseModel | BadRequestModel> {
     return baseHTTPTransport.post<SignUpResponseModel>('/auth/signup', {
       data: data,
     });
   }
 
-  async getUserData(): Promise<ResultType<UserModel | BadRequestModel>> {
+  async getUserData(): Promise<UserModel | BadRequestModel> {
     return baseHTTPTransport.get('/auth/user');
   }
 
-  async signIn(
-    data: SignInRequestModel
-  ): Promise<ResultType<unknown | BadRequestModel>> {
+  async signIn(data: SignInRequestModel): Promise<unknown | BadRequestModel> {
     return baseHTTPTransport.post('/auth/signin', {
       data: data,
     });
   }
 
-  async logout(): Promise<ResultType<unknown | BadRequestModel>> {
+  async logout(): Promise<unknown | BadRequestModel> {
     return baseHTTPTransport.post('/auth/logout');
   }
 }

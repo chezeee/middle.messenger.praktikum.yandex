@@ -3,13 +3,16 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  padding: 10px 0 10px 20px;
+  padding: 16px 0 16px 20px;
 
   &__header {
-    height: 54px;
+    height: 69px;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    padding-right: 16px;
     border-bottom: 1px solid #eaeaea;
+    gap: 10px;
   }
 
   &__main {
@@ -19,12 +22,29 @@
     overflow-y: scroll;
     -ms-overflow-style: thin;
     scrollbar-width: thin;
-    gap: 10px;
+    padding-right: 6px;
+    gap: 20px;
   }
 
   &__text-field {
     border-top: 1px solid #eaeaea;
     height: 54px;
+  }
+
+  .userList-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid #eaeaea;
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .options-wrap {
+    display: flex;
+    gap: 10px;
+    justify-content: space-between;
   }
 }
 

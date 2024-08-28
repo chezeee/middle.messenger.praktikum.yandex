@@ -9,4 +9,31 @@ const setChatsState = (chats: StateModel['chats']) => {
   store.set('chats', chats);
 };
 
-export { setUserState, setChatsState };
+const setCurrentChat = (chat: StateModel['currentChat']) => {
+  store.set('currentChat', chat);
+};
+
+const setCurrentChatIdState = (currentChatId: StateModel['currentChatId']) => {
+  store.set('currentChatId', currentChatId);
+};
+
+const setChatUsersState = (
+  currentChatUsers: StateModel['currentChatUsers']
+) => {
+  store.set('currentChatUsers', currentChatUsers);
+};
+
+const setCurrentChatMessages = (
+  currentChatMessages: StateModel['currentChatMessages']
+) => {
+  store.set('currentChatMessages', currentChatMessages);
+};
+
+export {
+  setUserState,
+  setChatsState,
+  setCurrentChat,
+  setCurrentChatIdState,
+  setChatUsersState,
+  setCurrentChatMessages,
+};

@@ -9,9 +9,9 @@ import Avatar from '../../components/avatar';
 import Modal from '../../components/modal';
 import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate } from '../../utils/inputValidate';
+import router from '../../services/Router/Router';
 
 import './profileEdit.scss';
-import router from '../../services/Router/Router';
 
 const modalAvatar = new Modal({ content: 'Смена аватара!' });
 

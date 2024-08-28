@@ -9,13 +9,6 @@ export default class Modal extends Component {
       attr: {
         class: 'modal-wrap',
       },
-      // events: {
-      //   // click: (evt: Event) => {
-      //   //   if (evt.currentTarget === this.element.querySelector('.modal')) {
-      //   //     this.hide();
-      //   //   }
-      //   // },
-      // },
     });
   }
 

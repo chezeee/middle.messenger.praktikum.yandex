@@ -13,6 +13,7 @@ import { UserModel } from '../../../models/UserModel';
 import { logout, signUp } from '../../../controllers/auth';
 
 import './registration.scss';
+import { store } from '../../../services/Store/Store';
 
 const formFields = [
   new Input({
@@ -98,7 +99,7 @@ export default class RegistrationPage extends Component {
               inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
             }
           },
-          submit: (evt) => {
+          submit: async (evt) => {
             evt.preventDefault();
 
             let result: boolean = true;
@@ -190,10 +191,18 @@ export default class RegistrationPage extends Component {
                 if (input.name !== 'password_repeat')
                   output[input.name] = input.value;
               });
-
-              console.log('Registration User data: ', output);
-              signUp(output);
-              router.go('/chat');
+              try {
+                await signUp(output);
+                alert('Пользователь успешно зарегестрирован');
+                await logout();
+                store.removeState();
+                router.go('/');
+              } catch (err) {
+                alert(
+                  'Пользователя не удалось зарегистрировать. Попробуйте снова...'
+                );
+                console.error(err);
+              }
             }
           },
         },
@@ -201,14 +210,17 @@ export default class RegistrationPage extends Component {
 
       link: new Link({
         text: 'Войти',
-        href: '/login',
         attr: { class: 'link' },
+        events: {
+          click: () => {
+            router.go('/');
+          },
+        },
       }),
       attr: { class: 'section-wrap registration' },
     });
   }
   render() {
-    logout();
     return this.compile(template, this.props);
   }
 }

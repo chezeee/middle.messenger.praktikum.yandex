@@ -1,11 +1,12 @@
 import { UserModel } from './UserModel';
 import { ChatModel } from './ChatModel';
-import { ResultType } from '../utils/HTTPTransport';
-import { BadRequestModel } from './ErrorModel';
+import { MessageModel } from './MessageModel';
 
 export type StateModel = {
-  error: string | null;
-  user: UserModel | null | ResultType<UserModel | BadRequestModel>;
-  chats: ChatModel[] | [] | ResultType<ChatModel[] | BadRequestModel>;
-  chatId: number | null;
+  user: UserModel | null;
+  chats: ChatModel[];
+  currentChat: ChatModel | null;
+  currentChatId: number | null;
+  currentChatUsers: UserModel[];
+  currentChatMessages: MessageModel[];
 };

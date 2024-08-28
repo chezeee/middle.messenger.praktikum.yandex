@@ -8,7 +8,7 @@ function isEqual(lhs: unknown, rhs: unknown) {
 export type RouteComponent = new (props?: ComponentProps) => Component;
 
 export default class Route {
-  _pathname: string;
+  pathname: string;
   _blockClass: RouteComponent;
   _block: InstanceType<RouteComponent> | null;
   _rootQuery: string;
@@ -20,7 +20,7 @@ export default class Route {
     rootQuery: string,
     props?: ComponentProps
   ) {
-    this._pathname = pathname;
+    this.pathname = pathname;
     this._blockClass = view;
     this._block = null;
     this._props = props;
@@ -29,7 +29,7 @@ export default class Route {
 
   navigate(pathname: string) {
     if (this.match(pathname)) {
-      this._pathname = pathname;
+      this.pathname = pathname;
       this.render();
     }
   }
@@ -41,7 +41,7 @@ export default class Route {
   }
 
   match(pathname: string) {
-    return isEqual(pathname.split('?')[0], this._pathname);
+    return isEqual(pathname.split('?')[0], this.pathname);
   }
 
   render() {

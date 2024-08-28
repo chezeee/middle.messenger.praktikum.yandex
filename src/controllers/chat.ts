@@ -12,17 +12,14 @@ import {
 } from '../models/ChatModel';
 import { BadRequestModel } from '../models/ErrorModel';
 import { UserModel } from '../models/UserModel';
-import { ResultType } from '../utils/HTTPTransport';
 
 const chatAPI = new ChatAPI();
 
-const getChats = async (): Promise<
-  ResultType<BadRequestModel | ChatModel[]>
-> => {
+const getChats = async (): Promise<BadRequestModel | ChatModel[]> => {
   const response = await chatAPI.getChats();
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
 
   return response;
@@ -30,11 +27,11 @@ const getChats = async (): Promise<
 
 const createChat = async (
   data: CreateChatModel
-): Promise<ResultType<CreateChatResponseModel | BadRequestModel>> => {
+): Promise<CreateChatResponseModel | BadRequestModel> => {
   const response = await chatAPI.createChat(data);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
 
   return response;
@@ -42,11 +39,11 @@ const createChat = async (
 
 const deleteChat = async (
   data: DeleteChatModel
-): Promise<ResultType<DeleteChatResponseModel | BadRequestModel>> => {
+): Promise<DeleteChatResponseModel | BadRequestModel> => {
   const response = await chatAPI.deleteChat(data);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
 
   return response;
@@ -54,35 +51,31 @@ const deleteChat = async (
 
 const getChatUsers = async (
   chatId: number
-): Promise<ResultType<UserModel | BadRequestModel>> => {
+): Promise<UserModel[] | BadRequestModel> => {
   const response = await chatAPI.getChatUsers(chatId);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
 
   return response;
 };
 
-const addUsersToChat = async (
-  data: AddUsersToChatModel
-): Promise<ResultType<BadRequestModel>> => {
+const addUsersToChat = async (data: AddUsersToChatModel) => {
   const response = await chatAPI.addUsersToChat(data);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
-
-  return response;
 };
 
 const deleteUsersFromChat = async (
   data: DeleteUsersModel
-): Promise<ResultType<BadRequestModel>> => {
+): Promise<BadRequestModel> => {
   const response = await chatAPI.deleteUsersFromChat(data);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
   }
 
   return response;
@@ -90,11 +83,21 @@ const deleteUsersFromChat = async (
 
 const getChatToken = async (
   chatId: number
-): Promise<ResultType<GetChatTokenResponseModel | BadRequestModel>> => {
+): Promise<GetChatTokenResponseModel> => {
   const response = await chatAPI.getChatToken(chatId);
 
   if (isResponseError(response)) {
-    throw new Error(response.data.reason);
+    throw new Error(response.reason);
+  }
+
+  return response;
+};
+
+const getNewMessagesCount = async (chatId: number): Promise<number> => {
+  const response = await chatAPI.getNewMessagesCount(chatId);
+
+  if (isResponseError(response)) {
+    throw new Error(response.reason);
   }
 
   return response;
@@ -108,4 +111,5 @@ export {
   addUsersToChat,
   deleteUsersFromChat,
   getChatToken,
+  getNewMessagesCount,
 };

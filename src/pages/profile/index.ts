@@ -6,8 +6,11 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import Button from '../../components/button';
 import Link from '../../components/link';
-import './profile.scss';
 import router from '../../services/Router/Router';
+import { logout } from '../../controllers/auth';
+
+import './profile.scss';
+import { store } from '../../services/Store/Store';
 
 const avatar = new Avatar({});
 
@@ -68,18 +71,36 @@ const formFields = [
 const profileOptions = [
   new Link({
     text: 'Изменить данные',
-    href: '/settings/profile-edit',
+    events: {
+      click: () => {
+        router.go('/settings/profile-edit');
+      },
+    },
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
     text: 'Изменить пароль',
-    href: '/settings/password-edit',
+    events: {
+      click: () => {
+        router.go('/settings/password-edit');
+      },
+    },
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
     text: 'Выйти',
-    href: '/login',
     attr: { class: 'profile-card-options__data-row' },
+    events: {
+      click: async () => {
+        try {
+          await logout();
+          store.removeState();
+          router.go('/');
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    },
   }),
 ];
 

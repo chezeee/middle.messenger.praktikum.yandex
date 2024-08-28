@@ -4,7 +4,7 @@ class Router {
   static _instance: InstanceType<typeof Router>;
   routes: Route[];
   history: History;
-  _currentRoute: Route | null;
+  currentRoute: Route | null;
   _rootQuery: string;
 
   constructor(rootQuery: string) {
@@ -15,7 +15,7 @@ class Router {
 
     this.routes = [];
     this.history = window.history;
-    this._currentRoute = null;
+    this.currentRoute = null;
     this._rootQuery = rootQuery;
   }
 
@@ -41,7 +41,7 @@ class Router {
     const route = this.getRoute(pathname);
 
     if (route) {
-      this._currentRoute = route;
+      this.currentRoute = route;
       route.render();
     }
   }

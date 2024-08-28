@@ -1,6 +1,4 @@
 import queryStringify from '../helpers/queryStringify';
-import { SignInRequestModel } from '../models/AuthModel';
-import { UserModel } from '../models/UserModel';
 
 enum METHODS {
   GET = 'GET',
@@ -12,30 +10,17 @@ enum METHODS {
 type Options = {
   headers?: Record<string, string>;
   method?: METHODS;
-  data?: Record<string, unknown> | FormData | UserModel | SignInRequestModel;
+  data?:
+    | Record<string, unknown>
+    | FormData
   withCredentials?: boolean;
-};
-
-export type ResultType<ResponseType> = {
-  status: number;
-  data: ResponseType;
 };
 
 type MethodsHTML = <ResponseType = unknown>(
   url: string,
   options?: Options,
   timeout?: number
-) => Promise<ResultType<ResponseType>>;
-
-// function queryStringify(data: Record<string, unknown>) {
-//   if (typeof data !== 'object') {
-//     throw new Error('Data must be object');
-//   }
-//   const keys = Object.keys(data);
-//   return keys.reduce((acc, key, index) => {
-//     return `${acc}${key}=${data[key]}${index < keys.length - 1 ? '&' : ''}`;
-//   }, '?');
-// }
+) => Promise<ResponseType>;
 
 export default class HTTPTransport {
   baseUrl?: string;
@@ -57,7 +42,7 @@ export default class HTTPTransport {
     return this.request(url, { ...options, method: METHODS.DELETE }, timeout);
   };
 
-  request: MethodsHTML = (url, options = {}, timeout = 5000) => {
+  request: MethodsHTML = (url, options = {}, timeout = 1000) => {
     const { headers = {}, method, data, withCredentials = true } = options;
 
     return new Promise((resolve, reject) => {
