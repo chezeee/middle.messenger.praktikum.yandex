@@ -1,137 +1,337 @@
 import template from './template.hbs?raw';
 import Component from '../../services/Component';
-// import HTTPTransport from '../../utils/HTTPTransport';
+import WSTransport from '../../utils/WSTransport';
+import { store } from '../../services/Store/Store';
 import ContentForm from '../../components/contentForm';
 import ChatCard from '../../components/chatCard';
 import ChatList from '../../components/chatList';
 import Message from '../../components/message';
 import Button from '../../components/button';
+import Form from '../../components/form';
+import Input from '../../components/input';
+import Modal from '../../components/modal';
+import Title from '../../components/title';
 import MsgSendingForm from '../../components/msgSendingForm';
-import data from '../../data.json';
 import { inputValidate } from '../../utils/inputValidate';
 import { MESSAGE_REGEXP } from '../../constants/consts-regexp';
+import convertDateString from '../../helpers/convertDate';
+import {
+  addUsersToChat,
+  createChat,
+  getChats,
+  getChatUsers,
+} from '../../controllers/chat';
+import router from '../../services/Router/Router';
+import { ComponentWithStoreProps, Connect } from '../../services/Store/Connect';
+import { ChatModel } from '../../models/ChatModel';
+import { MessageModel } from '../../models/MessageModel';
+import { UserModel } from '../../models/UserModel';
+import {
+  setChatsState,
+  setChatUsersState,
+  // setCurrentChat,
+  setCurrentChatIdState,
+  setCurrentChatMessages,
+} from '../../services/Store/Actions';
 
 import './chat.scss';
 
-// const requests = new HTTPTransport();
-// const response: Promise<Record<string, unknown>[]> = requests
-//   .get('/data.json', { headers: { 'Content-Type': 'application/json' } })
-//   .then((data: XMLHttpRequest) => {
-//     return JSON.parse(data.response).chat.chatList;
-//   });constresponse
-// response.then((data) => {
-//   data.forEach(
-//     ({ title, messages }: Record<string, Record<string, string>[]>) => {
-//       chatCards.push(
-//         new ChatCard({
-//           title: title,
-//           date: `${messages[messages.length - 1].date}`,
-//           lastMessage: `${messages[messages.length - 1].content}`,
-//         })
-//       );
-//     }
-//   );
-// });
-// console.log('chatCards', chatCards);
-// Не удаётся отрендерить массив компонентов "chatCards", полученный через GET запрос из data.json.
-//(реализовал закомментированным кодом выше)
-// Возможно проблема с ассинхронным получением данных, но с её решением не успел разобраться.
-const contentForm = new ContentForm({
-  buttonChatOpts: new Button({ text: 'Опции' }),
-  msgSendingForm: new MsgSendingForm({
-    buttonAttachment: new Button({ type: 'button', text: 'Прикрепить' }),
-    name: 'message',
-    buttonSmiles: new Button({ type: 'button', text: 'Смайлы' }),
-    ButtonSubmit: new Button({
-      type: 'submit',
-      text: 'Отправить',
-    }),
-    events: {
-      submit: (evt) => {
-        evt.preventDefault();
-        const date = new Date();
-        const textArea = (
-          document.querySelector(
-            '.sending-form__message'
-          ) as HTMLTextAreaElement
-        );
-        data.chat.chatList.forEach((chat) => {
-          if (chat.id === contentForm.props.idActiveChat && 
-            inputValidate(textArea.value, MESSAGE_REGEXP, textArea)) {
-            chat.messages.push({
-              outgoing: true,
-              date: `${date.getHours()}:${date.getMinutes()}`,
-              content: textArea.value,
-            });
-            console.log({
-              'content': textArea.value, 
-              "outgoing": true, 
-              "date": `${date.getHours()}:${date.getMinutes()}`,
-            });
+const webSocket = new WSTransport();
+
+console.log('webSocket.messages: ', webSocket.messages);
+
+const connectToChat = async () => {
+  const user = store.getStateKey('user') as UserModel;
+  const currentChatId = store.getStateKey('currentChatId');
+  setChatsState((await getChats()) as ChatModel[]);
+
+  if (user && currentChatId) {
+    try {
+      await webSocket.connect(user.id as number, currentChatId as number);
+
+      webSocket.socket.addEventListener(
+        'message',
+        async (event: MessageEvent) => {
+          const messages: MessageModel[] | MessageModel = JSON.parse(
+            event.data
+          );
+
+          webSocket.messages = Array.isArray(messages)
+            ? [...messages.reverse(), ...webSocket.messages]
+            : [...webSocket.messages, messages];
+
+          // Скролл поля c сообщениями чата к последнему сообщению
+          setCurrentChatMessages(webSocket.messages);
+
+          setChatsState((await getChats()) as ChatModel[]);
+
+          const contentFormMsgs = document.querySelector('.content-form__main');
+          if (contentFormMsgs) {
+            contentFormMsgs.scrollTop = contentFormMsgs.scrollHeight;
           }
-          textArea.value = '';
-          return;
-        });
-      },
-    },
-  }),
-});
-const chatCards: Component[] = data.chat.chatList.map(
-  ({ id, title, messages }) =>
-    new ChatCard({
-      title: title,
-      date: messages[messages.length - 1].date,
-      lastMessage: messages[messages.length - 1].content,
-      attr: { id: `${id}` },
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  } else {
+    setChatsState((await getChats()) as ChatModel[]);
+    setCurrentChatIdState(null);
+    setCurrentChatMessages([]);
+  }
+};
+
+connectToChat();
+
+const createChatModal = new Modal({
+  content: [
+    new Title({ text: 'Создать чат' }),
+    new Form({
+      formFields: new Input({
+        label: '',
+        type: 'text',
+        name: 'create_chat',
+        placeholder: 'название чата',
+        isRequired: true,
+        attr: { class: 'form-input-wrap' },
+      }),
+      button: new Button({
+        type: 'submit',
+        text: 'Добавить',
+        attr: { class: 'button-apply' },
+      }),
+      attr: { class: 'modal-form-wrap' },
       events: {
-        click: (evt: Event) => {
-          document
-            .querySelectorAll('.card')
-            .forEach((card) => card.classList.remove('active'));
-          (evt.target as HTMLElement)
-            .closest('div.card')
-            ?.classList.add('active');
+        submit: async (evt: Event) => {
+          evt.preventDefault();
+          const input = (evt?.target as HTMLElement)?.querySelector('input');
+          const title = input?.value as string;
+          try {
+            await createChat({ title: title });
 
-          const contentDisplay = messages.map(({ outgoing, date, content }) => {
-            if (outgoing) {
-              return new Message({
-                content,
-                date,
-                attr: { class: 'message outgoing' },
-              });
-            }
-            return new Message({
-              content,
-              date,
-              attr: { class: 'message incoming' },
-            });
-          });
-
-          contentForm.setProps({
-            idActiveChat: id,
-            contentDisplay: contentDisplay,
-          });
+            const chats = (await getChats()) as ChatModel[];
+            setChatsState(chats);
+            createChatModal.hide();
+          } catch (error) {
+            console.error(error.message);
+          }
         },
       },
-    })
-);
+    }),
+  ],
+});
 
-class Chat extends Component {
+const addUserToChatModal = new Modal({
+  content: [
+    new Title({ text: 'Добавить пользователей' }),
+    new Form({
+      formFields: new Input({
+        label: '',
+        type: 'text',
+        name: 'add_user',
+        placeholder: 'ID пользователя (несколько через запятую)',
+        isRequired: true,
+        attr: { class: 'form-input-wrap' },
+      }),
+      button: new Button({
+        type: 'submit',
+        text: 'Добавить',
+        attr: { class: 'button-apply' },
+      }),
+      attr: { class: 'modal-form-wrap' },
+      events: {
+        submit: async (evt: Event) => {
+          evt.preventDefault();
+          const input = (evt?.target as HTMLElement)?.querySelector('input');
+          const usersId = input?.value.split(',').map((id) => Number(id));
+          const currentChatId = store.getStateKey('currentChatId') as number;
+          try {
+            await addUsersToChat({
+              users: usersId as number[],
+              chatId: store.getStateKey('currentChatId') as number,
+            });
+
+            setChatUsersState(
+              (await getChatUsers(currentChatId)) as UserModel[]
+            );
+
+            alert('Пользователи добавлены успешно.');
+          } catch (error) {
+            alert(`Не удалось добавить пользователя. Попробуйте ещё раз`);
+            console.error(error.message);
+          }
+          addUserToChatModal.hide();
+        },
+      },
+    }),
+  ],
+});
+
+const modals = [createChatModal, addUserToChatModal];
+
+const ConnectChatList = Connect(ChatList, (state) => {
+  return {
+    buttonCreate: new Button({
+      text: 'Создать чат',
+      events: {
+        click: () => {
+          createChatModal.show();
+        },
+      },
+      attr: { class: 'button-apply' },
+    }),
+    buttonMyProfile: new Button({
+      type: 'button',
+      text: 'Мой профиль',
+      events: {
+        click: () => {
+          router.go(`/settings?user_ID=${state?.user?.id}`);
+        },
+      },
+      attr: { class: 'button-apply' },
+    }),
+    chatCards: state.user
+      ? state.chats.map(
+          ({ id, title, last_message }) =>
+            new ChatCard({
+              title: title,
+              date: convertDateString(last_message?.time as string),
+              lastMessage: last_message?.content,
+              events: {
+                click: async () => {
+                  //
+                  setCurrentChatIdState(id);
+                  router.go(`/messenger?id=${id}`);
+                  setChatUsersState((await getChatUsers(id)) as UserModel[]);
+                  await connectToChat();
+                },
+              },
+              attr: {
+                class: [
+                  'card',
+                  id === state.currentChatId ? 'active' : '',
+                ].join(' '),
+              },
+            })
+        )
+      : '',
+  };
+});
+
+const chatList = new ConnectChatList();
+
+const connectContentForm = Connect(ContentForm, (state) => {
+  return {
+    idActiveChat: state.currentChatId,
+    userList: state.currentChatUsers.map(({ first_name, second_name }) => {
+      return new Button({
+        text: `${first_name} ${second_name}`,
+      });
+    }),
+    chatOptions: [
+      new Button({
+        type: 'button',
+        text: 'Добавить пользователей',
+        attr: { class: 'button-apply contentForm-button' },
+        events: {
+          click: () => {
+            addUserToChatModal.show();
+          },
+        },
+      }),
+      new Button({
+        type: 'button',
+        text: 'Удалить пользователя',
+        attr: { class: 'button-apply contentForm-button' },
+      }),
+      new Button({
+        type: 'button',
+        text: 'Удалить чат',
+        attr: { class: 'button-apply contentForm-button' },
+      }),
+    ],
+    contentDisplay: state.currentChatMessages.map(
+      ({ user_id, time, content }) => {
+        return user_id === state?.user?.id
+          ? new Message({
+              content,
+              date: convertDateString(time as string),
+              attr: { class: 'message outgoing' },
+            })
+          : new Message({
+              content,
+              date: convertDateString(time as string),
+              attr: { class: 'message incoming' },
+            });
+      }
+    ),
+    msgSendingForm: new MsgSendingForm({
+      buttonAttachment: new Button({
+        type: 'button',
+        text: 'Прикрепить',
+        attr: { class: 'button-apply contentForm-button' },
+      }),
+      name: 'message',
+      buttonSmiles: new Button({
+        type: 'button',
+        text: 'Смайлы',
+        attr: { class: 'button-apply contentForm-button' },
+      }),
+      buttonSubmit: new Button({
+        type: 'submit',
+        text: 'Отправить',
+        attr: { class: 'button-apply contentForm-button' },
+        events: {},
+      }),
+      events: {
+        submit: (evt) => {
+          evt.preventDefault();
+          const textArea = document.querySelector(
+            '.sending-form__message'
+          ) as HTMLTextAreaElement;
+
+          if (
+            state.currentChatId &&
+            inputValidate(textArea.value, MESSAGE_REGEXP, textArea)
+          ) {
+            webSocket.sendMessage(textArea.value);
+          }
+          textArea.value = '';
+        },
+        keypress: (event: KeyboardEvent) => {
+          if (event.key === 'Enter') {
+            const textArea = document.querySelector(
+              '.sending-form__message'
+            ) as HTMLTextAreaElement;
+
+            if (
+              state.currentChatId &&
+              inputValidate(textArea.value, MESSAGE_REGEXP, textArea)
+            ) {
+              webSocket.sendMessage(textArea.value);
+            }
+            textArea.value = '';
+          }
+        },
+      },
+    }),
+  };
+});
+
+const contentForm = new connectContentForm();
+
+class ChatPage extends Component {
+  constructor(props?: ComponentWithStoreProps) {
+    super('section', {
+      chatList: chatList,
+      contentForm: contentForm,
+      modals: modals,
+      ...props,
+    });
+  }
   render() {
     return this.compile(template, this.props);
   }
 }
 
-export const ChatPage = new Chat('section', {
-  chatList: new ChatList({
-    buttonCreate: new Button({ text: 'Создать чат' }),
-    buttonMyProfile: new Button({
-      type: 'button',
-      text: 'Мой профиль',
-      attr: { onclick: "window.location='/profile'" },
-    }),
-    chatCards: chatCards,
-  }),
-
-  contentForm: contentForm,
-});
+export default ChatPage;

@@ -6,7 +6,11 @@ import Input from '../../components/input';
 import Form from '../../components/form';
 import Button from '../../components/button';
 import Link from '../../components/link';
+import router from '../../services/Router/Router';
+import { logout } from '../../controllers/auth';
+
 import './profile.scss';
+import { store } from '../../services/Store/Store';
 
 const avatar = new Avatar({});
 
@@ -67,44 +71,67 @@ const formFields = [
 const profileOptions = [
   new Link({
     text: 'Изменить данные',
-    href: '/profile-edit',
+    events: {
+      click: () => {
+        router.go('/settings/profile-edit');
+      },
+    },
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
     text: 'Изменить пароль',
-    href: '/password-edit',
+    events: {
+      click: () => {
+        router.go('/settings/password-edit');
+      },
+    },
     attr: { class: 'profile-card-options__data-row' },
   }),
   new Link({
     text: 'Выйти',
-    href: '/login',
     attr: { class: 'profile-card-options__data-row' },
+    events: {
+      click: async () => {
+        try {
+          await logout();
+          store.removeState();
+          router.go('/');
+        } catch (e) {
+          console.error(e);
+        }
+      },
+    },
   }),
 ];
 
-class Profile extends Component {
+export default class ProfilePage extends Component {
+  constructor() {
+    super('section', {
+      button: new Button({
+        attr: {
+          type: 'button',
+          class: 'button-return',
+        },
+        events: {
+          click: () => {
+            router.go('/messenger');
+          },
+        },
+      }),
+      avatar: avatar,
+      title: new Title({
+        text: 'Илья Ялымов',
+      }),
+      form: new Form({
+        formFields,
+        button: '',
+        attr: { class: 'form profile-form' },
+      }),
+
+      profileOptions,
+    });
+  }
   render() {
     return this.compile(template, this.props);
   }
 }
-
-export const ProfilePage = new Profile('section', {
-  button: new Button({
-    attr: {
-      type: 'button',
-      class: 'button-return',
-      onclick: "window.location='/chat'",
-    },
-  }),
-  avatar: avatar,
-  title: new Title({
-    text: 'Илья Ялымов',
-  }),
-  form: new Form({
-    formFields,
-    button: '',
-    attr: { class: 'form profile-form' },
-  }),
-
-  profileOptions,
-});

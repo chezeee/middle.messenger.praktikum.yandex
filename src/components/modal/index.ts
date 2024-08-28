@@ -7,16 +7,23 @@ export default class Modal extends Component {
     super('div', {
       ...props,
       attr: {
-        class: 'modal',
-      },
-      events: {
-        // click: (evt: Event) => {
-        //   if (evt.currentTarget === this.element.querySelector('.modal')) {
-        //     this.hide();
-        //   }
-        // },
+        class: 'modal-wrap',
       },
     });
+  }
+
+  addEvents() {
+    this.element
+      .querySelector('.bg')
+      ?.addEventListener('click', () => this.hide());
+  }
+
+  show() {
+    this.element.classList.add('active-modal');
+  }
+
+  hide() {
+    this.element.classList.remove('active-modal');
   }
 
   render() {

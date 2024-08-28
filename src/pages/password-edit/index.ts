@@ -10,6 +10,7 @@ import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate, comparePasswords } from '../../utils/inputValidate';
 
 import './passwordEdit.scss';
+import router from '../../services/Router/Router';
 
 const avatar = new Avatar({});
 
@@ -37,106 +38,113 @@ const formFields = [
   }),
 ];
 
-class PasswordEdit extends Component {
+export default class PasswordEditPage extends Component {
+  constructor() {
+    super('section', {
+      button: new Button({
+        attr: {
+          type: 'button',
+          class: 'button-return',
+        },
+        events: {
+          click: () => {
+            router.go('/settings');
+          },
+        },
+      }),
+      avatar: avatar,
+      title: new Title({
+        text: '',
+      }),
+      form: new Form({
+        formFields,
+        button: new Button({
+          text: 'Сохранить',
+          attr: { type: 'submit', class: 'button-apply' },
+        }),
+        attr: { class: 'form password-edit-form' },
+        events: {
+          blur: (evt) => {
+            const input = evt.target as HTMLInputElement;
+            if (input.name === 'oldPassword') {
+              inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+            } else if (input.name === 'newPassword') {
+              inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+            } else if (input.name === 'newPasswordRepeat') {
+              inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
+            }
+          },
+          submit: (evt) => {
+            evt.preventDefault();
+
+            let result: boolean = true;
+            const output: Record<string, string> = {};
+            const inputs = (evt.target as HTMLElement)?.querySelectorAll(
+              'input'
+            );
+
+            inputs.forEach((input) => {
+              switch (input.name) {
+                case 'oldPassword':
+                  if (
+                    input.value !== '' &&
+                    inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input)
+                  ) {
+                    break;
+                  }
+                  result = false;
+                  break;
+                case 'newPassword':
+                  if (
+                    input.value !== '' &&
+                    inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input)
+                  ) {
+                    break;
+                  }
+                  result = false;
+                  break;
+
+                case 'newPasswordRepeat':
+                  if (
+                    input.value !== '' &&
+                    inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input) &&
+                    comparePasswords(
+                      (
+                        document.querySelector(
+                          `[name="newPassword"]`
+                        ) as HTMLInputElement
+                      )?.value,
+                      input.value,
+                      input
+                    )
+                  ) {
+                    break;
+                  }
+                  result = false;
+                  break;
+              }
+            });
+
+            if (result) {
+              inputs.forEach((input) => {
+                output[`${input.name}`] = input.value;
+              });
+
+              console.log('Change password data: ', output);
+            }
+            return;
+          },
+        },
+      }),
+
+      link: new Link({
+        text: 'Вы ещё не зарегистрированы?',
+        attr: { href: '/registration', class: 'link' },
+      }),
+      attr: { class: 'profile-wrap profile-edit-wrap' },
+    });
+  }
   render() {
     return this.compile(template, this.props);
   }
 }
-
-export const PasswordEditPage = new PasswordEdit('section', {
-  button: new Button({
-    attr: {
-      type: 'button',
-      class: 'button-return',
-      onclick: "window.location='/profile'",
-    },
-  }),
-  avatar: avatar,
-  title: new Title({
-    text: '',
-  }),
-  form: new Form({
-    formFields,
-    button: new Button({
-      text: 'Сохранить',
-      attr: { type: 'submit', class: 'button-apply' },
-    }),
-    attr: { class: 'form password-edit-form' },
-    events: {
-      blur: (evt) => {
-        const input = evt.target as HTMLInputElement;
-        if (input.name === 'oldPassword') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        } else if (input.name === 'newPassword') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        } else if (input.name === 'newPasswordRepeat') {
-          inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
-        }
-      },
-      submit: (evt) => {
-        evt.preventDefault();
-
-        let result: boolean = true;
-        const output: Record<string, string> = {};
-        const inputs = (evt.target as HTMLElement)?.querySelectorAll('input');
-
-        inputs.forEach((input) => {
-          switch (input.name) {
-            case 'oldPassword':
-              if (
-                input.value !== '' &&
-                inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input)
-              ) {
-                break;
-              }
-              result = false;
-              break;
-            case 'newPassword':
-              if (
-                input.value !== '' &&
-                inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input)
-              ) {
-                break;
-              }
-              result = false;
-              break;
-
-            case 'newPasswordRepeat':
-              if (
-                input.value !== '' &&
-                inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input) &&
-                comparePasswords(
-                  (
-                    document.querySelector(
-                      `[name="newPassword"]`
-                    ) as HTMLInputElement
-                  )?.value,
-                  input.value,
-                  input
-                )
-              ) {
-                break;
-              }
-              result = false;
-              break;
-          }
-        });
-
-        if (result) {
-          inputs.forEach((input) => {
-            output[`${input.name}`] = input.value;
-          });
-
-          console.log('Change password data: ', output);
-        }
-        return;
-      },
-    },
-  }),
-
-  link: new Link({
-    text: 'Вы ещё не зарегистрированы?',
-    attr: { href: '/registration', class: 'link' },
-  }),
-  attr: { class: 'profile-wrap profile-edit-wrap' },
-});

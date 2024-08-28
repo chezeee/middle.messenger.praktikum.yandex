@@ -2,3 +2,19 @@
   width: 100vw;
   display: flex;
 }
+
+.modal-form-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.contentForm-button {
+  width: min-content;
+  height: min-content;
+  padding: 10px;
+}
+
+.sending-form {
+  align-items: center;
+  padding-right: 16px;
+}
