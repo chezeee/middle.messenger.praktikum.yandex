@@ -38,7 +38,7 @@ export default class ChatAPI extends BaseAPI {
   }
 
   async deleteUsersFromChat(data: DeleteUsersModel): Promise<BadRequestModel> {
-    return baseHTTPTransport.delete('/chat/users', { data: data });
+    return baseHTTPTransport.delete('/chats/users', { data: data });
   }
 
   async getChatToken(

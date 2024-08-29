@@ -8,9 +8,15 @@ import Link from '../../components/link';
 import Avatar from '../../components/avatar';
 import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate, comparePasswords } from '../../utils/inputValidate';
+import router from '../../services/Router/Router';
+import { PasswordRequestModel, UserModel } from '../../models/UserModel';
+import { store } from '../../services/Store/Store';
+import { changeUserPassword } from '../../controllers/user';
 
 import './passwordEdit.scss';
-import router from '../../services/Router/Router';
+
+const user = store.getStateKey('user') as UserModel;
+const userId = user.id as number;
 
 const avatar = new Avatar({});
 
@@ -48,7 +54,7 @@ export default class PasswordEditPage extends Component {
         },
         events: {
           click: () => {
-            router.go('/settings');
+            router.go(`/settings?user_ID=${userId}`);
           },
         },
       }),
@@ -74,7 +80,7 @@ export default class PasswordEditPage extends Component {
               inputValidate(input.value, REGEXP.PASSWORD_REGEXP, input);
             }
           },
-          submit: (evt) => {
+          submit: async (evt) => {
             evt.preventDefault();
 
             let result: boolean = true;
@@ -127,10 +133,18 @@ export default class PasswordEditPage extends Component {
 
             if (result) {
               inputs.forEach((input) => {
-                output[`${input.name}`] = input.value;
+                if (input.name !== 'newPasswordRepeat') {
+                  output[`${input.name}`] = input.value;
+                }
               });
 
-              console.log('Change password data: ', output);
+              try {
+                await changeUserPassword(output as PasswordRequestModel);
+                alert('Пароль успешно изменен!');
+              } catch (error) {
+                alert('Не удалось изменить пароль. Что-то пошло не так');
+                console.error(error);
+              }
             }
             return;
           },

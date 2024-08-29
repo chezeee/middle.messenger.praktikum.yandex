@@ -18,6 +18,8 @@ import convertDateString from '../../helpers/convertDate';
 import {
   addUsersToChat,
   createChat,
+  deleteChat,
+  deleteUsersFromChat,
   getChats,
   getChatUsers,
 } from '../../controllers/chat';
@@ -37,8 +39,6 @@ import {
 import './chat.scss';
 
 const webSocket = new WSTransport();
-
-console.log('webSocket.messages: ', webSocket.messages);
 
 const connectToChat = async () => {
   const user = store.getStateKey('user') as UserModel;
@@ -148,14 +148,12 @@ const addUserToChatModal = new Modal({
           try {
             await addUsersToChat({
               users: usersId as number[],
-              chatId: store.getStateKey('currentChatId') as number,
+              chatId: currentChatId,
             });
 
             setChatUsersState(
               (await getChatUsers(currentChatId)) as UserModel[]
             );
-
-            alert('Пользователи добавлены успешно.');
           } catch (error) {
             alert(`Не удалось добавить пользователя. Попробуйте ещё раз`);
             console.error(error.message);
@@ -167,7 +165,88 @@ const addUserToChatModal = new Modal({
   ],
 });
 
-const modals = [createChatModal, addUserToChatModal];
+const deleteUsersModal = new Modal({
+  content: [
+    new Title({ text: 'Удалить пользователей из чата' }),
+    new Form({
+      formFields: new Input({
+        label: '',
+        type: 'text',
+        name: 'delete_user',
+        placeholder: 'ID пользователя (несколько через запятую)',
+        isRequired: true,
+        attr: { class: 'form-input-wrap' },
+      }),
+      button: new Button({
+        type: 'submit',
+        text: 'Удалить',
+        attr: { class: 'button-apply' },
+      }),
+      attr: { class: 'modal-form-wrap' },
+      events: {
+        submit: async (evt: Event) => {
+          evt.preventDefault();
+          const input = (evt?.target as HTMLElement)?.querySelector('input');
+          const usersId = input?.value.split(',').map((id) => Number(id));
+          const currentChatId = store.getStateKey('currentChatId') as number;
+          try {
+            await deleteUsersFromChat({
+              users: usersId as number[],
+              chatId: currentChatId,
+            });
+
+            setChatUsersState(
+              (await getChatUsers(currentChatId)) as UserModel[]
+            );
+          } catch (error) {
+            alert(`Не удалось удалить. Попробуйте ещё раз`);
+            console.error(error);
+          }
+          deleteUsersModal.hide();
+        },
+      },
+    }),
+  ],
+});
+
+const deleteChatModal = new Modal({
+  content: [
+    new Title({ text: 'Удалить чат?' }),
+    new Form({
+      button: new Button({
+        type: 'submit',
+        text: 'Удалить',
+        attr: { class: 'button-apply' },
+      }),
+      attr: { class: 'modal-form-wrap' },
+      events: {
+        submit: async (evt: Event) => {
+          evt.preventDefault();
+          const currentChatId = store.getStateKey('currentChatId') as number;
+          try {
+            await deleteChat({
+              chatId: currentChatId,
+            });
+
+            setChatsState((await getChats()) as ChatModel[]);
+            setCurrentChatIdState(null);
+          } catch (error) {
+            alert(`Не удалось удалить. Попробуйте ещё раз`);
+            console.error(error);
+          }
+          deleteChatModal.hide();
+        },
+      },
+    }),
+  ],
+});
+
+const modals = [
+  createChatModal,
+  addUserToChatModal,
+  deleteUsersModal,
+  deleteChatModal,
+];
 
 const ConnectChatList = Connect(ChatList, (state) => {
   return {
@@ -195,11 +274,12 @@ const ConnectChatList = Connect(ChatList, (state) => {
           ({ id, title, last_message }) =>
             new ChatCard({
               title: title,
-              date: convertDateString(last_message?.time as string),
+              date: last_message?.time
+                ? convertDateString(last_message?.time as string)
+                : '',
               lastMessage: last_message?.content,
               events: {
                 click: async () => {
-                  //
                   setCurrentChatIdState(id);
                   router.go(`/messenger?id=${id}`);
                   setChatUsersState((await getChatUsers(id)) as UserModel[]);
@@ -223,11 +303,15 @@ const chatList = new ConnectChatList();
 const connectContentForm = Connect(ContentForm, (state) => {
   return {
     idActiveChat: state.currentChatId,
-    userList: state.currentChatUsers.map(({ first_name, second_name }) => {
-      return new Button({
-        text: `${first_name} ${second_name}`,
-      });
-    }),
+    userList: state.currentChatUsers.map(
+      ({ first_name, second_name, display_name }) => {
+        return new Button({
+          text: display_name
+            ? `${display_name}`
+            : `${first_name} ${second_name}`,
+        });
+      }
+    ),
     chatOptions: [
       new Button({
         type: 'button',
@@ -241,13 +325,23 @@ const connectContentForm = Connect(ContentForm, (state) => {
       }),
       new Button({
         type: 'button',
-        text: 'Удалить пользователя',
+        text: 'Удалить пользователей',
         attr: { class: 'button-apply contentForm-button' },
+        events: {
+          click: () => {
+            deleteUsersModal.show();
+          },
+        },
       }),
       new Button({
         type: 'button',
         text: 'Удалить чат',
         attr: { class: 'button-apply contentForm-button' },
+        events: {
+          click: () => {
+            deleteChatModal.show();
+          },
+        },
       }),
     ],
     contentDisplay: state.currentChatMessages.map(
