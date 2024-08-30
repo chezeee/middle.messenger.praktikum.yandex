@@ -11,69 +11,82 @@ import { logout } from '../../controllers/auth';
 
 import './profile.scss';
 import { store } from '../../services/Store/Store';
+import { Connect } from '../../services/Store/Connect';
+import { UserModel } from '../../models/UserModel';
+
+const chatId = store.getStateKey('currentChatId');
+const user = store.getStateKey('user') as UserModel;
+const userId = user.id as number;
 
 const avatar = new Avatar({});
 
-const formFields = [
-  new Input({
-    label: 'Почта',
-    type: 'email',
-    name: 'email',
-    value: 'chezeee@gmail.com',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-  new Input({
-    label: 'Логин',
-    type: 'text',
-    name: 'login',
-    value: 'Chezeee',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-  new Input({
-    label: 'Имя',
-    type: 'text',
-    name: 'first_name',
-    value: 'Илья',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-  new Input({
-    label: 'Фамилия',
-    type: 'text',
-    name: 'second_name',
-    placeholder: 'фамилию',
-    value: 'Ялымов',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-  new Input({
-    label: 'Имя в чате',
-    type: 'text',
-    name: 'display_name',
-    placeholder: 'имя',
-    value: 'Chezeee',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-  new Input({
-    label: 'Телефон',
-    type: 'text',
-    name: 'phone',
-    placeholder: 'новый телефон',
-    value: '+78889997766',
-    isReadOnly: true,
-    attr: { class: 'form-data-row profile-row' },
-  }),
-];
+const FormConnect = Connect(Form as never, (state) => {
+  return {
+    formFields: [
+      new Input({
+        label: 'Почта',
+        type: 'email',
+        name: 'email',
+        value: state?.user?.email,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+      new Input({
+        label: 'Логин',
+        type: 'text',
+        name: 'login',
+        value: state?.user?.login,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+      new Input({
+        label: 'Имя',
+        type: 'text',
+        name: 'first_name',
+        value: state?.user?.first_name,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+      new Input({
+        label: 'Фамилия',
+        type: 'text',
+        name: 'second_name',
+        placeholder: 'фамилию',
+        value: state?.user?.second_name,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+      new Input({
+        label: 'Имя в чате',
+        type: 'text',
+        name: 'display_name',
+        placeholder: 'имя',
+        value: state?.user?.display_name,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+      new Input({
+        label: 'Телефон',
+        type: 'text',
+        name: 'phone',
+        placeholder: 'новый телефон',
+        value: state?.user?.phone,
+        isReadOnly: true,
+        attr: { class: 'form-data-row profile-row' },
+      }),
+    ],
+    attr: { class: 'form profile-form' },
+  };
+});
+
+const formConnect = new FormConnect();
 
 const profileOptions = [
   new Link({
     text: 'Изменить данные',
     events: {
       click: () => {
-        router.go('/settings/profile-edit');
+        router.go(`/settings/profile-edit?user_ID=${userId}`);
       },
     },
     attr: { class: 'profile-card-options__data-row' },
@@ -82,7 +95,7 @@ const profileOptions = [
     text: 'Изменить пароль',
     events: {
       click: () => {
-        router.go('/settings/password-edit');
+        router.go(`/settings/password-edit?user_ID=${userId}`);
       },
     },
     attr: { class: 'profile-card-options__data-row' },
@@ -104,7 +117,7 @@ const profileOptions = [
   }),
 ];
 
-export default class ProfilePage extends Component {
+class ProfilePage extends Component {
   constructor() {
     super('section', {
       button: new Button({
@@ -114,16 +127,16 @@ export default class ProfilePage extends Component {
         },
         events: {
           click: () => {
-            router.go('/messenger');
+            router.go(`/messenger?id=${chatId}`);
           },
         },
       }),
       avatar: avatar,
       title: new Title({
-        text: 'Илья Ялымов',
+        text: `${user.first_name} ${user.second_name}`,
       }),
       form: new Form({
-        formFields,
+        formFields: formConnect,
         button: '',
         attr: { class: 'form profile-form' },
       }),
@@ -135,3 +148,5 @@ export default class ProfilePage extends Component {
     return this.compile(template, this.props);
   }
 }
+
+export default ProfilePage;
