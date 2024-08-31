@@ -248,7 +248,7 @@ const modals = [
   attachFileModal,
 ];
 
-const ConnectChatList = Connect(ChatList, (state) => {
+const ConnectChatList = Connect(ChatList as never, (state) => {
   return {
     buttonCreate: new Button({
       text: 'Создать чат',
@@ -300,7 +300,7 @@ const ConnectChatList = Connect(ChatList, (state) => {
 
 const chatList = new ConnectChatList();
 
-const connectContentForm = Connect(ContentForm, (state) => {
+const connectContentForm = Connect(ContentForm as never, (state) => {
   return {
     idActiveChat: state.currentChatId,
     userList: state.currentChatUsers.map(
