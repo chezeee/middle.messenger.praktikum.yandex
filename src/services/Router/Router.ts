@@ -1,17 +1,17 @@
 import Route, { RouteComponent } from './Route';
 
 class Router {
-  static _instance: InstanceType<typeof Router>;
+  // static _instance: InstanceType<typeof Router>;
   routes: Route[];
   history: History;
   currentRoute: Route | null;
   _rootQuery: string;
 
   constructor(rootQuery: string) {
-    if (Router._instance) {
-      return Router._instance;
-    }
-    Router._instance = this;
+    // if (Router._instance) {
+    //   return Router._instance;
+    // }
+    // Router._instance = this;
 
     this.routes = [];
     this.history = window.history;
@@ -19,7 +19,7 @@ class Router {
     this._rootQuery = rootQuery;
   }
 
-  use(
+  public use(
     pathname: string,
     block: RouteComponent,
     props?: Record<string, unknown>
@@ -29,7 +29,7 @@ class Router {
     return this;
   }
 
-  start() {
+  public start() {
     this._onRoute(window.location.pathname);
 
     window.addEventListener('popstate', () => {
@@ -46,20 +46,20 @@ class Router {
     }
   }
 
-  go(pathname: string) {
+  public go(pathname: string) {
     this.history.pushState({ pathname }, '', pathname);
     this._onRoute(pathname);
   }
 
-  back() {
+  public back() {
     this.history.back();
   }
 
-  forward() {
+  public forward() {
     this.history.forward();
   }
 
-  getRoute(pathname: string) {
+  public getRoute(pathname: string) {
     return (
       this.routes.find((route) => route.match(pathname)) ??
       this.routes.find((route) => route.match('*'))

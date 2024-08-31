@@ -9,14 +9,11 @@ import Avatar from '../../components/avatar';
 import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate, comparePasswords } from '../../utils/inputValidate';
 import router from '../../services/Router/Router';
-import { PasswordRequestModel, UserModel } from '../../models/UserModel';
-import { store } from '../../services/Store/Store';
+import { PasswordRequestModel } from '../../models/UserModel';
 import { changeUserPassword } from '../../controllers/user';
 
 import './passwordEdit.scss';
 
-const user = store.getStateKey('user') as UserModel;
-const userId = user.id as number;
 
 const avatar = new Avatar({});
 
@@ -54,7 +51,7 @@ export default class PasswordEditPage extends Component {
         },
         events: {
           click: () => {
-            router.go(`/settings?user_ID=${userId}`);
+            router.go(`/settings`);
           },
         },
       }),

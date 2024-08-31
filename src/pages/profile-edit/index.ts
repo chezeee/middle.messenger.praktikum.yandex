@@ -12,15 +12,11 @@ import { inputValidate } from '../../utils/inputValidate';
 import router from '../../services/Router/Router';
 import { Connect } from '../../services/Store/Connect';
 import { changeUserProfile } from '../../controllers/user';
-import { store } from '../../services/Store/Store';
-import { UserModel } from '../../models/UserModel';
 import { setUserState } from '../../services/Store/Actions';
 import { getUserData } from '../../controllers/auth';
 
 import './profileEdit.scss';
 
-const user = store.getStateKey('user') as UserModel;
-const userId = user.id as number;
 
 const modalAvatar = new Modal({ content: 'Смена аватара!' });
 
@@ -215,7 +211,7 @@ export default class ProfileEditPage extends Component {
         },
         events: {
           click: () => {
-            router.go(`/settings?user_ID=${userId}`);
+            router.go(`/settings`);
           },
         },
       }),

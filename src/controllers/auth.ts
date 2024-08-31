@@ -2,6 +2,7 @@ import AuthAPI from '../api/auth-api';
 import isResponseError from '../helpers/isResponseError';
 import { UserModel } from '../models/UserModel';
 import { SignInRequestModel } from '../models/AuthModel';
+// import router from '../services/Router/Router';
 
 const authAPI = new AuthAPI();
 

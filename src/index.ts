@@ -23,10 +23,11 @@ router
   .start();
 
 try {
+  const user = await getUserData();
   if (
-    (await getUserData()) &&
     (router.currentRoute?.pathname === '/' ||
-      router.currentRoute?.pathname === '/sign-up')
+      router.currentRoute?.pathname === '/sign-up') &&
+    user
   ) {
     router.go('/messenger');
   }

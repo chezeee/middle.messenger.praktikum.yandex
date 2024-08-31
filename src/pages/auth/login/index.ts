@@ -16,6 +16,7 @@ import { ChatModel } from '../../../models/ChatModel';
 
 import '../auth.scss';
 import './login.scss';
+// import { store } from '../../../services/Store/Store';
 
 const formFields = [
   new Input({
@@ -34,9 +35,7 @@ const formFields = [
   }),
 ];
 
-// if (store.getStateKey('user')) {
-//   logout();
-// }
+// store.removeState();
 
 export default class LoginPage extends Component {
   constructor() {

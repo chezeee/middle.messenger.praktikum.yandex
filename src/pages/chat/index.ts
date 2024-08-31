@@ -41,9 +41,9 @@ import './chat.scss';
 const webSocket = new WSTransport();
 
 const connectToChat = async () => {
-  const user = store.getStateKey('user') as UserModel;
   const currentChatId = store.getStateKey('currentChatId');
   setChatsState((await getChats()) as ChatModel[]);
+  const user = store.getStateKey('user') as UserModel;
 
   if (user && currentChatId) {
     try {
@@ -423,6 +423,7 @@ class ChatPage extends Component {
       ...props,
     });
   }
+
   render() {
     return this.compile(template, this.props);
   }

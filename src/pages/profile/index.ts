@@ -8,15 +8,10 @@ import Button from '../../components/button';
 import Link from '../../components/link';
 import router from '../../services/Router/Router';
 import { logout } from '../../controllers/auth';
-
-import './profile.scss';
 import { store } from '../../services/Store/Store';
 import { Connect } from '../../services/Store/Connect';
-import { UserModel } from '../../models/UserModel';
 
-const chatId = store.getStateKey('currentChatId');
-const user = store.getStateKey('user') as UserModel;
-const userId = user.id as number;
+import './profile.scss';
 
 const avatar = new Avatar({});
 
@@ -86,7 +81,7 @@ const profileOptions = [
     text: 'Изменить данные',
     events: {
       click: () => {
-        router.go(`/settings/profile-edit?user_ID=${userId}`);
+        router.go(`/settings/profile-edit`);
       },
     },
     attr: { class: 'profile-card-options__data-row' },
@@ -95,7 +90,7 @@ const profileOptions = [
     text: 'Изменить пароль',
     events: {
       click: () => {
-        router.go(`/settings/password-edit?user_ID=${userId}`);
+        router.go(`/settings/password-edit`);
       },
     },
     attr: { class: 'profile-card-options__data-row' },
@@ -107,17 +102,27 @@ const profileOptions = [
       click: async () => {
         try {
           await logout();
+
           store.removeState();
+          window.location.replace('');
           router.go('/');
-        } catch (e) {
-          console.error(e);
+        } catch (error) {
+          console.error(error);
         }
       },
     },
   }),
 ];
 
-class ProfilePage extends Component {
+const TitleConnect = Connect(Title as never, (state) => {
+  return {
+    text: `${state?.user?.first_name} ${state?.user?.second_name}`,
+  };
+});
+
+const titleConnect = new TitleConnect();
+
+export default class ProfilePage extends Component {
   constructor() {
     super('section', {
       button: new Button({
@@ -127,14 +132,12 @@ class ProfilePage extends Component {
         },
         events: {
           click: () => {
-            router.go(`/messenger?id=${chatId}`);
+            router.go(`/messenger`);
           },
         },
       }),
       avatar: avatar,
-      title: new Title({
-        text: `${user.first_name} ${user.second_name}`,
-      }),
+      title: titleConnect,
       form: new Form({
         formFields: formConnect,
         button: '',
@@ -144,9 +147,8 @@ class ProfilePage extends Component {
       profileOptions,
     });
   }
+
   render() {
     return this.compile(template, this.props);
   }
 }
-
-export default ProfilePage;
