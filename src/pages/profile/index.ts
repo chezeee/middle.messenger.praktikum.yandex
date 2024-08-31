@@ -10,10 +10,20 @@ import router from '../../services/Router/Router';
 import { logout } from '../../controllers/auth';
 import { store } from '../../services/Store/Store';
 import { Connect } from '../../services/Store/Connect';
+import changeAvatarModal from '../components/ChangeAvatarModal';
+import { RESOURCES } from '../../api/base-api';
 
 import './profile.scss';
 
-const avatar = new Avatar({});
+const AvatarConnect = Connect(Avatar as never, (state) => {
+  return {
+    avatar: state?.user?.avatar ? RESOURCES + state?.user?.avatar : false,
+  };
+});
+
+const avatarConnect = new AvatarConnect();
+
+const modals = [changeAvatarModal];
 
 const FormConnect = Connect(Form as never, (state) => {
   return {
@@ -136,14 +146,14 @@ export default class ProfilePage extends Component {
           },
         },
       }),
-      avatar: avatar,
+      avatar: avatarConnect,
       title: titleConnect,
       form: new Form({
         formFields: formConnect,
         button: '',
         attr: { class: 'form profile-form' },
       }),
-
+      modals: modals,
       profileOptions,
     });
   }

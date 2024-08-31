@@ -1,12 +1,12 @@
 import template from './template.hbs?raw';
 import Component from '../../services/Component';
+import { RESOURCES } from '../../api/base-api';
 import Title from '../../components/title';
 import Input from '../../components/input';
 import Form from '../../components/form';
 import Button from '../../components/button';
 import Link from '../../components/link';
 import Avatar from '../../components/avatar';
-import Modal from '../../components/modal';
 import * as REGEXP from '../../constants/consts-regexp';
 import { inputValidate } from '../../utils/inputValidate';
 import router from '../../services/Router/Router';
@@ -14,20 +14,19 @@ import { Connect } from '../../services/Store/Connect';
 import { changeUserProfile } from '../../controllers/user';
 import { setUserState } from '../../services/Store/Actions';
 import { getUserData } from '../../controllers/auth';
+import changeAvatarModal from '../components/ChangeAvatarModal';
 
 import './profileEdit.scss';
 
-
-const modalAvatar = new Modal({ content: 'Смена аватара!' });
-
-const avatar = new Avatar({
-  events: {
-    click: () => {
-      console.log('modalAvatar', modalAvatar.show);
-      return modalAvatar.show();
-    },
-  },
+const AvatarConnect = Connect(Avatar as never, (state) => {
+  return {
+    avatar: state?.user?.avatar ? RESOURCES + state?.user?.avatar : false,
+  };
 });
+
+const avatarConnect = new AvatarConnect();
+
+const modals = [changeAvatarModal];
 
 const FormConnect = Connect(Form as never, (state) => {
   return {
@@ -215,8 +214,8 @@ export default class ProfileEditPage extends Component {
           },
         },
       }),
-      avatar,
-      modal: modalAvatar,
+      avatar: avatarConnect,
+      modal: modals,
       title: new Title({
         text: '',
       }),
