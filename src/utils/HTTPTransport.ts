@@ -10,9 +10,7 @@ enum METHODS {
 type Options = {
   headers?: Record<string, string>;
   method?: METHODS;
-  data?:
-    | Record<string, unknown>
-    | FormData
+  data?: Record<string, unknown> | FormData;
   withCredentials?: boolean;
 };
 

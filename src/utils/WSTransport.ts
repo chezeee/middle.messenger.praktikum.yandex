@@ -2,16 +2,10 @@ import { getChatToken } from '../controllers/chat';
 import { MessageModel } from '../models/MessageModel';
 
 class WSTransport {
-  // static _instance: InstanceType<typeof WSTransport>;
   socket: WebSocket;
   messages: MessageModel[];
 
   constructor() {
-    // if (WSTransport._instance) {
-    //   return WSTransport._instance;
-    // }
-    // WSTransport._instance = this;
-
     this.socket;
     this.messages = [];
   }
@@ -21,7 +15,6 @@ class WSTransport {
 
     try {
       const token = (await getChatToken(chatId))?.token as string;
-      // console.log('TOKEN', token);
 
       if (token) {
         this.socket = new WebSocket(
@@ -53,18 +46,12 @@ class WSTransport {
     this.socket.addEventListener('message', (event) => {
       console.log('Получены данные', event.data);
     });
-
-    // this.socket.addEventListener('error', event => {
-    //   console.log('Ошибка', event.message);
-    // });
   }
 
   public getOldMessages() {
-    // console.log(`this socket`, this);
-
     this.socket.send(
       JSON.stringify({
-        content: '0',
+        content: 0,
         type: 'get old',
       })
     );
@@ -79,8 +66,13 @@ class WSTransport {
     );
   }
 
-  public sendFile(formData: FormData) {
-    console.log('Отправка файла: ', formData);
+  public sendFile(id: number) {
+    return this.socket?.send(
+      JSON.stringify({
+        content: String(id),
+        type: 'file',
+      })
+    );
   }
 }
 

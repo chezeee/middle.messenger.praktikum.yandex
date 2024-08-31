@@ -1,4 +1,43 @@
 :root {
+  --avatar-change-text-color: #fff;
+  --avatar-change-bg-color: #0000002b;
+  --input-label-text-color: #999;
+  --input-border-bottom-color: #3369f3;
+  --input-placeholder-text-color: #999;
+  --btn-apply-text-color: #fff;
+  --btn-apply-bg-color: #3369f3;
+  --profile-input-text-color: #999;
+  --profile-border-top-color: #eaeaea;
+  --profile-logout-text-color: #f00;
+  --profile-data-row-label-color: #1e1e1e;
+  --chat-card-avatar-bg-color: #efefef;
+  --chat-card-border-top-color: #eaeaea;
+  --chat-card-title-text-color: #1e1e1e;
+  --chat-card-date-text-color: #999;
+  --chat-card-content-text-color: #999;
+  --chat-card-hover-bg-color: #f5f5f5;
+  --chat-card-active-bg-color: #e4edfd;
+  --chat-list-bg-color: #fbfbfb;
+  --chat-list-border-right-color: #eaeaea;
+  --cf-border-bottom-color: #eaeaea;
+  --cf-text-field-vorder-top-color: #eaeaea;
+  --cf-user-list-border-color: #eaeaea;
+  --cf-no-active-chats-text-color: #999;
+  --form-box-shadow-color: #00000024;
+  --link-text-color: #3369f3;
+  --message-border-color: #eaeaea;
+  --border-incoming-bg-color: #f8f8f8;
+  --border-outgoing-bg-color: #e4edfd;
+  --modal-bg-color: #fff;
+  --modal-box-shadow-color: #00000024;
+  --modal-around-bg-color: #000000d5;
+  --modal-error-text-color: #f00;
+  --smf-text-field-border-color: #eaeaea;
+  --title-text-color: #1e1e1e;
+  --error-validate-border-color: #f00;
+  --error-validate-text-color: #ab0000;
+  --error-validate-message-color: #f00;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -11,18 +50,17 @@
 
 * {
   box-sizing: border-box;
-  // scroll-behavior: smooth;
   margin: 0;
   padding: 0;
 }
 
 .error-validate {
-  border: 1px solid red;
-  color: rgb(171 0 0);
+  border: 1px solid var(--error-validate-border-color);
+  color: var(--error-validate-text-color);
 }
 
 .error-validate-message {
-  color: red;
+  color: var(--error-validate-message-color);
   padding: 4px;
   font-size: 9px;
   z-index: 1;

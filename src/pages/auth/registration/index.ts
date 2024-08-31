@@ -7,13 +7,14 @@ import Button from '../../../components/button';
 import Link from '../../../components/link';
 import * as REGEXP from '../../../constants/consts-regexp';
 import { inputValidate, comparePasswords } from '../../../utils/inputValidate';
-
 import router from '../../../services/Router/Router';
 import { UserModel } from '../../../models/UserModel';
-import { logout, signUp } from '../../../controllers/auth';
+import { getUserData, signUp } from '../../../controllers/auth';
+import { setChatsState, setUserState } from '../../../services/Store/Actions';
+import { getChats } from '../../../controllers/chat';
+import { ChatModel } from '../../../models/ChatModel';
 
 import './registration.scss';
-import { store } from '../../../services/Store/Store';
 
 const formFields = [
   new Input({
@@ -193,10 +194,10 @@ export default class RegistrationPage extends Component {
               });
               try {
                 await signUp(output);
-                alert('Пользователь успешно зарегестрирован');
-                await logout();
-                store.removeState();
-                router.go('/');
+                const user = await getUserData();
+                setUserState(user);
+                setChatsState((await getChats()) as ChatModel[]);
+                router.go('/messenger');
               } catch (err) {
                 alert(
                   'Пользователя не удалось зарегистрировать. Попробуйте снова...'

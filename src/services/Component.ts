@@ -88,7 +88,6 @@ export default class Component {
     });
   }
 
-  // Может переопределять пользователь, необязательно трогать
   componentDidMount() {}
 
   dispatchComponentDidMount() {
@@ -103,8 +102,6 @@ export default class Component {
     }
     this._render();
   }
-
-  // Может переопределять пользователь, необязательно трогать
 
   componentDidUpdate(oldProps: ComponentProps, newProps: ComponentProps) {
     if (oldProps !== newProps) {

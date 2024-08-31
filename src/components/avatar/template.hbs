@@ -1,5 +1,8 @@
-{{#if avatar}}
-  <img src='{{avatar}}' alt='User avatar' />
-{{else}}
-  <img src='../images/avatar_empty.jpg' alt='User avatar not found' />
-{{/if}}
+<div class='avatar-wrap'>
+  {{#if avatar}}
+    <img src={{{avatar}}} alt='User avatar' />
+  {{else}}
+    <img src='../images/avatar_empty.jpg' alt='User avatar not found' />
+  {{/if}}
+  <div class='change-avatar'>Сменить аватар</div>
+</div>

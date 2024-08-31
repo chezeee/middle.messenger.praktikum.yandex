@@ -4,8 +4,8 @@ import './contentForm.scss';
 import { ComponentWithStoreProps } from '../../services/Store/Connect';
 
 export default class ContentForm extends Component {
-  constructor(tagName?: string, props?: ComponentWithStoreProps) {
-    super((tagName = 'section'), {
+  constructor(props: ComponentWithStoreProps) {
+    super('section', {
       ...props,
       attr: { class: 'content-form' },
     });

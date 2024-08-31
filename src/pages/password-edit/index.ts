@@ -1,5 +1,6 @@
 import template from './template.hbs?raw';
 import Component from '../../services/Component';
+import { RESOURCES } from '../../api/base-api';
 import Title from '../../components/title';
 import Input from '../../components/input';
 import Form from '../../components/form';
@@ -11,11 +12,20 @@ import { inputValidate, comparePasswords } from '../../utils/inputValidate';
 import router from '../../services/Router/Router';
 import { PasswordRequestModel } from '../../models/UserModel';
 import { changeUserPassword } from '../../controllers/user';
+import { Connect } from '../../services/Store/Connect';
+import changeAvatarModal from '../components/ChangeAvatarModal';
 
 import './passwordEdit.scss';
 
+const AvatarConnect = Connect(Avatar as never, (state) => {
+  return {
+    avatar: state?.user?.avatar ? RESOURCES + state?.user?.avatar : false,
+  };
+});
 
-const avatar = new Avatar({});
+const avatarConnect = new AvatarConnect();
+
+const modals = [changeAvatarModal];
 
 const formFields = [
   new Input({
@@ -55,7 +65,7 @@ export default class PasswordEditPage extends Component {
           },
         },
       }),
-      avatar: avatar,
+      avatar: avatarConnect,
       title: new Title({
         text: '',
       }),
@@ -153,6 +163,7 @@ export default class PasswordEditPage extends Component {
         attr: { href: '/registration', class: 'link' },
       }),
       attr: { class: 'profile-wrap profile-edit-wrap' },
+      modals: modals,
     });
   }
   render() {

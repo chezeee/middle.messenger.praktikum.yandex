@@ -7,7 +7,7 @@
   &__label {
     font-weight: 500;
     font-size: 9px;
-    color: #999;
+    color: var(--input-label-text-color);
   }
 
   &__input {
@@ -16,11 +16,11 @@
     width: 280px;
     padding: 8px 0 7px;
     border: 0;
-    border-bottom: 1px #3369f3 solid;
+    border-bottom: 1px var(--input-border-bottom-color) solid;
   }
 
   &__input::placeholder {
-    color: #999;
+    color: var(--input-placeholder-text-color);
     font-size: 12px;
   }
 

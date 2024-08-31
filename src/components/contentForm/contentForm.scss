@@ -3,15 +3,15 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  padding: 16px 0 16px 20px;
+  padding: 16px 20px;
 
   &__header {
-    height: 69px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    min-height: 60px;
     padding-right: 16px;
-    border-bottom: 1px solid #eaeaea;
+    border-bottom: 1px solid var(--cf-border-bottom-color);
     gap: 10px;
   }
 
@@ -27,16 +27,16 @@
   }
 
   &__text-field {
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid var(cf-text-field-vorder-top-color);
     height: 54px;
   }
 
-  .userList-wrap {
+  .user-list-wrap {
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    border: 1px solid #eaeaea;
+    border: 1px solid var(--cf-user-list-border-color);
     padding: 10px;
     font-size: 13px;
   }
@@ -45,6 +45,7 @@
     display: flex;
     gap: 10px;
     justify-content: space-between;
+    align-items: center;
   }
 }
 
@@ -59,5 +60,5 @@
 .no-active-chats-msg {
   font-weight: 500;
   font-size: 12px;
-  color: #999;
+  color: var(--cf-no-ative-chats-text-color);
 }

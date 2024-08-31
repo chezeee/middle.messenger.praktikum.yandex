@@ -1,10 +1,10 @@
-[https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/19](https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/19)
+[(https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/25)](https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/25)
 
 # Веб-мессенджер
 
 ## Описание
 
-Данное веб-приложение представляет из себя SPA для удобного обмена сообщенями и файлами с другими пользователями по протоколу WebSocket.
+Данное веб-приложение представляет из себя SPA для удобного обмена сообщенями с другими пользователями по протоколу WebSocket.
 
 ## Версия
 
@@ -37,12 +37,12 @@
 
 ### **URL страниц:**
 
-- <https://yp-messenger.netlify.app/login> - страница авторизации пользователя
-- <https://yp-messenger.netlify.app/registration> - страница регистрации пользователя
+- <https://yp-messenger.netlify.app/> - страница авторизации пользователя
+- <https://yp-messenger.netlify.app/sign-up> - страница регистрации пользователя
 - <https://yp-messenger.netlify.app/messenger> - страница c списком чатом и лентой переписки
-- <https://yp-messenger.netlify.app/profile> - страница c информацией о пользователе
-- <https://yp-messenger.netlify.app/profile-edit> - страница для изменения данных пользователя
-- <https://yp-messenger.netlify.app/password-edit> - страница для смены пароля пользователя
+- <https://yp-messenger.netlify.app/settings> - страница c информацией о пользователе
+- <https://yp-messenger.netlify.app/settings/profile-edit> - страница для изменения данных пользователя
+- <https://yp-messenger.netlify.app/settings/password-edit> - страница для смены пароля пользователя
 - <https://yp-messenger.netlify.app/error404> - страница с ошибкой 404
 - <https://yp-messenger.netlify.app/error500> - страница с ошибкой 500
 
@@ -58,11 +58,11 @@
 
 ### **URL страниц для просмотра в режиме разработки**
 
-- <http://localhost:3000/login> - страница авторизации пользователя
-- <http://localhost:3000/registration> - страница регистрации пользователя
+- <http://localhost:3000/> - страница авторизации пользователя
+- <http://localhost:3000/sign-up> - страница регистрации пользователя
 - <http://localhost:3000/messenger> - страница c списком чатом и лентой переписки
-- <http://localhost:3000/profile> - страница c информацией о пользователе
-- <http://localhost:3000/profile-edit> - страница для изменения данных пользователя
-- <http://localhost:3000/password-edit> - страница для смены пароля пользователя
+- <http://localhost:3000/settings> - страница c информацией о пользователе
+- <http://localhost:3000/settings/profile-edit> - страница для изменения данных пользователя
+- <http://localhost:3000/settings/password-edit> - страница для смены пароля пользователя
 - <http://localhost:3000/error404> - страница с ошибкой 404
 - <http://localhost:3000/error500> - страница с ошибкой 500
