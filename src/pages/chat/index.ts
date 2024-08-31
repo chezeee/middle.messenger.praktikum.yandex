@@ -257,7 +257,7 @@ const ConnectChatList = Connect(ChatList, (state) => {
           createChatModal.show();
         },
       },
-      attr: { class: 'button-apply contentForm-button' },
+      attr: { class: 'button-apply content-form-button' },
     }),
     buttonMyProfile: new Button({
       type: 'button',
@@ -267,7 +267,7 @@ const ConnectChatList = Connect(ChatList, (state) => {
           router.go(`/settings?user_ID=${state?.user?.id}`);
         },
       },
-      attr: { class: 'button-apply contentForm-button' },
+      attr: { class: 'button-apply content-form-button' },
     }),
     chatCards: state.user
       ? state.chats.map(
@@ -316,7 +316,7 @@ const connectContentForm = Connect(ContentForm, (state) => {
       new Button({
         type: 'button',
         text: 'Добавить пользователей',
-        attr: { class: 'button-apply contentForm-button' },
+        attr: { class: 'button-apply content-form-button' },
         events: {
           click: () => {
             addUserToChatModal.show();
@@ -326,7 +326,7 @@ const connectContentForm = Connect(ContentForm, (state) => {
       new Button({
         type: 'button',
         text: 'Удалить пользователей',
-        attr: { class: 'button-apply contentForm-button' },
+        attr: { class: 'button-apply content-form-button' },
         events: {
           click: () => {
             deleteUsersModal.show();
@@ -336,7 +336,7 @@ const connectContentForm = Connect(ContentForm, (state) => {
       new Button({
         type: 'button',
         text: 'Удалить чат',
-        attr: { class: 'button-apply contentForm-button' },
+        attr: { class: 'button-apply content-form-button' },
         events: {
           click: () => {
             deleteChatModal.show();

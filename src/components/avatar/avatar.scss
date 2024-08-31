@@ -27,12 +27,7 @@
   transition: 0.4s;
 }
 
-.avatar-wrap:hover .changeAvatar {
-  opacity: 1;
-  visibility: visible;
-}
-
-.changeAvatar {
+.change-avatar {
   display: flex;
   position: absolute;
   top: 0;
@@ -49,4 +44,9 @@
   background-color: var(--avatar-change-bg-color);
   border-radius: 50%;
   cursor: pointer;
+}
+
+.avatar-wrap:hover .change-avatar {
+  opacity: 1;
+  visibility: visible;
 }

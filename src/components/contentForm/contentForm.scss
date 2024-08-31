@@ -3,7 +3,7 @@
   flex-direction: column;
   width: 100vw;
   height: 100vh;
-  padding: 16px 20px 16px 20px;
+  padding: 16px 20px;
 
   &__header {
     display: flex;
@@ -11,7 +11,7 @@
     align-items: center;
     min-height: 60px;
     padding-right: 16px;
-    border-bottom: 1px solid var(--CF-border-bottom-color);
+    border-bottom: 1px solid var(--cf-border-bottom-color);
     gap: 10px;
   }
 
@@ -27,7 +27,7 @@
   }
 
   &__text-field {
-    border-top: 1px solid var(CF-textField-vorder-top-color);
+    border-top: 1px solid var(cf-text-field-vorder-top-color);
     height: 54px;
   }
 
@@ -36,7 +36,7 @@
     justify-content: space-between;
     align-items: center;
     gap: 10px;
-    border: 1px solid var(--CF-userList-border-color);
+    border: 1px solid var(--cf-user-list-border-color);
     padding: 10px;
     font-size: 13px;
   }
@@ -60,5 +60,5 @@
 .no-active-chats-msg {
   font-weight: 500;
   font-size: 12px;
-  color: var(--CF-noActiveChats-text-color);
+  color: var(--cf-no-ative-chats-text-color);
 }
