@@ -42,7 +42,7 @@ export default class HTTPTransport {
     return this.request(url, { ...options, method: METHODS.DELETE }, timeout);
   };
 
-  request: MethodsHTML = (url, options = {}, timeout = 1000) => {
+  request: MethodsHTML = (url, options = {}, timeout = 5000) => {
     const { headers = {}, method, data, withCredentials = true } = options;
 
     return new Promise((resolve, reject) => {

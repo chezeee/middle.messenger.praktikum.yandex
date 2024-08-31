@@ -18,8 +18,6 @@ const initState: StateModel = {
 };
 
 class Store extends EventBus {
-  // static _instance: Store;
-
   private _state: StateModel = {
     user: null,
     chats: [],
@@ -30,12 +28,9 @@ class Store extends EventBus {
   };
 
   constructor() {
-    // if (Store._instance) {
-    //   return Store._instance;
-    // }
     super();
-    // Store._instance = this;
-    // this._state;
+
+    this._state;
 
     const savedState = localStorage.getItem(storageName);
 
@@ -62,7 +57,6 @@ class Store extends EventBus {
   public set<T extends keyof StateModel>(path: T, value: StateModel[T]) {
     this._state[path] = value;
     this.emit(StoreEvents.Updated);
-    // return this;
   }
 
   public removeState() {
