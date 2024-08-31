@@ -1,17 +1,12 @@
 import Route, { RouteComponent } from './Route';
 
 class Router {
-  // static _instance: InstanceType<typeof Router>;
   routes: Route[];
   history: History;
   currentRoute: Route | null;
   _rootQuery: string;
 
   constructor(rootQuery: string) {
-    // if (Router._instance) {
-    //   return Router._instance;
-    // }
-    // Router._instance = this;
 
     this.routes = [];
     this.history = window.history;

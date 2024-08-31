@@ -6,10 +6,10 @@
   gap: 20px;
   padding: 12px 10px;
   cursor: pointer;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--chatCard-border-top-color);
 
   &__avatar {
-    background-color: #efefef;
+    background-color: var(--chatCard-avatar-bg-color);
     min-width: 47px;
     min-height: 47px;
     border-radius: 50%;
@@ -23,20 +23,20 @@
     &__title {
       font-weight: 600;
       font-size: 13px;
-      color: #1e1e1e;
+      color: var(--chatCard-title-text-color);
     }
 
     &__date {
       font-weight: 500;
       font-size: 9px;
-      color: #999;
+      color: var(--chatCard-date-text-color);
     }
   }
 
   &__content {
     font-weight: 500;
     font-size: 12px;
-    color: #999;
+    color: var(--chatCard-content-text-color);
     word-break: break-all;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -50,14 +50,14 @@
 }
 
 .card:last-child {
-  border-bottom: 1px solid #eaeaea;
+  border-bottom: 1px solid var(--chatCard-border-top-color);
 }
 
 .card:hover {
-  background: rgb(245 245 245);
+  background: var(--chatCard-hover-bg-color);
 }
 
 .active,
 .active:hover {
-  background-color: #e4edfd;
+  background-color: var(--chatCard-active-bg-color);
 }

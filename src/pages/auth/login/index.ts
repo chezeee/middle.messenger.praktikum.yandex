@@ -16,7 +16,6 @@ import { ChatModel } from '../../../models/ChatModel';
 
 import '../auth.scss';
 import './login.scss';
-// import { store } from '../../../services/Store/Store';
 
 const formFields = [
   new Input({

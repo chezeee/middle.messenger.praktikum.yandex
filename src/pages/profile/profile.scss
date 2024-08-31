@@ -9,7 +9,7 @@
 .profile-row input {
   font-weight: 500;
   font-size: 13px;
-  color: #999;
+  color: var(--profile-input-text-color);
   text-align: right;
 }
 
@@ -26,7 +26,7 @@
   &__data-row {
     display: flex;
     justify-content: space-between;
-    border-top: 1px solid #eaeaea;
+    border-top: 1px solid var(--profile-border-top-color);
     padding: 10px 0;
   }
 
@@ -35,6 +35,6 @@
   }
 
   &__data-row:last-child .link {
-    color: #f00;
+    color: var(--profile-logout-text-color);
   }
 }

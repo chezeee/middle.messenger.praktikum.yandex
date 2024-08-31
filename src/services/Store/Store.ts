@@ -11,7 +11,6 @@ const storageName: string = 'YPmessenger';
 const initState: StateModel = {
   user: null,
   chats: [],
-  currentChat: null,
   currentChatId: null,
   currentChatUsers: [],
   currentChatMessages: [],
@@ -21,7 +20,6 @@ class Store extends EventBus {
   private _state: StateModel = {
     user: null,
     chats: [],
-    currentChat: null,
     currentChatId: null,
     currentChatUsers: [],
     currentChatMessages: [],

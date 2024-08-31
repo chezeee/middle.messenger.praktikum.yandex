@@ -7,7 +7,6 @@
 }
 
 .avatar {
-  padding-top: 60px;
   display: flex;
   justify-content: center;
   width: 100%;
@@ -40,14 +39,14 @@
   visibility: hidden;
   opacity: 0;
   font-size: 13px;
-  color: white;
+  color: var(--avatar-change-text-color);
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 130px;
   height: 130px;
   transition: 0.4s;
-  background-color: rgba(0, 0, 0, 0.169);
+  background-color: var(--avatar-change-bg-color);
   border-radius: 50%;
   cursor: pointer;
 }

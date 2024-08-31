@@ -9,12 +9,10 @@
 }
 
 .contentForm-button {
+  font-size: 12px;
+  min-width: 100px;
   width: min-content;
+  min-height: 41px;
   height: min-content;
-  padding: 10px;
-}
-
-.sending-form {
-  align-items: center;
-  padding-right: 16px;
+  padding: 6px;
 }

@@ -31,16 +31,16 @@ import { UserModel } from '../../models/UserModel';
 import {
   setChatsState,
   setChatUsersState,
-  // setCurrentChat,
   setCurrentChatIdState,
   setCurrentChatMessages,
 } from '../../services/Store/Actions';
+import attachFileModal from '../components/AttachFileModal';
 
 import './chat.scss';
 
 const webSocket = new WSTransport();
 
-const connectToChat = async () => {
+export const connectToChat = async () => {
   const currentChatId = store.getStateKey('currentChatId');
   setChatsState((await getChats()) as ChatModel[]);
   const user = store.getStateKey('user') as UserModel;
@@ -60,7 +60,6 @@ const connectToChat = async () => {
             ? [...messages.reverse(), ...webSocket.messages]
             : [...webSocket.messages, messages];
 
-          // Скролл поля c сообщениями чата к последнему сообщению
           setCurrentChatMessages(webSocket.messages);
 
           setChatsState((await getChats()) as ChatModel[]);
@@ -246,6 +245,7 @@ const modals = [
   addUserToChatModal,
   deleteUsersModal,
   deleteChatModal,
+  attachFileModal,
 ];
 
 const ConnectChatList = Connect(ChatList, (state) => {
@@ -257,7 +257,7 @@ const ConnectChatList = Connect(ChatList, (state) => {
           createChatModal.show();
         },
       },
-      attr: { class: 'button-apply' },
+      attr: { class: 'button-apply contentForm-button' },
     }),
     buttonMyProfile: new Button({
       type: 'button',
@@ -267,7 +267,7 @@ const ConnectChatList = Connect(ChatList, (state) => {
           router.go(`/settings?user_ID=${state?.user?.id}`);
         },
       },
-      attr: { class: 'button-apply' },
+      attr: { class: 'button-apply contentForm-button' },
     }),
     chatCards: state.user
       ? state.chats.map(
@@ -362,24 +362,40 @@ const connectContentForm = Connect(ContentForm, (state) => {
     msgSendingForm: new MsgSendingForm({
       buttonAttachment: new Button({
         type: 'button',
-        text: 'Прикрепить',
-        attr: { class: 'button-apply contentForm-button' },
+        text: '',
+        attr: { class: 'sending-file-btn' },
+        events: {
+          click: (evt) => {
+            evt.preventDefault();
+            attachFileModal.show();
+          },
+        },
       }),
       name: 'message',
-      buttonSmiles: new Button({
-        type: 'button',
-        text: 'Смайлы',
-        attr: { class: 'button-apply contentForm-button' },
-      }),
       buttonSubmit: new Button({
-        type: 'submit',
-        text: 'Отправить',
-        attr: { class: 'button-apply contentForm-button' },
-        events: {},
+        type: 'button',
+        text: '',
+        attr: { class: 'sending-msg-btn' },
+        events: {
+          click: (evt: Event) => {
+            evt.preventDefault();
+            const textArea = document.querySelector(
+              '.sending-form__message'
+            ) as HTMLTextAreaElement;
+            if (
+              state.currentChatId &&
+              inputValidate(textArea.value, MESSAGE_REGEXP, textArea)
+            ) {
+              webSocket.sendMessage(textArea.value);
+            }
+            textArea.value = '';
+          },
+        },
       }),
-      events: {
-        submit: (evt) => {
-          evt.preventDefault();
+    }),
+    events: {
+      keypress: (event: KeyboardEvent) => {
+        if (event.key === 'Enter') {
           const textArea = document.querySelector(
             '.sending-form__message'
           ) as HTMLTextAreaElement;
@@ -391,24 +407,9 @@ const connectContentForm = Connect(ContentForm, (state) => {
             webSocket.sendMessage(textArea.value);
           }
           textArea.value = '';
-        },
-        keypress: (event: KeyboardEvent) => {
-          if (event.key === 'Enter') {
-            const textArea = document.querySelector(
-              '.sending-form__message'
-            ) as HTMLTextAreaElement;
-
-            if (
-              state.currentChatId &&
-              inputValidate(textArea.value, MESSAGE_REGEXP, textArea)
-            ) {
-              webSocket.sendMessage(textArea.value);
-            }
-            textArea.value = '';
-          }
-        },
+        }
       },
-    }),
+    },
   };
 });
 
