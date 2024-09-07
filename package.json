@@ -9,21 +9,38 @@
     "build": "vite build --emptyOutDir",
     "preview": "vite preview",
     "eslint": "eslint . ",
-    "stylelint": "stylelint src/**/*.scss"
+    "stylelint": "stylelint src/**/*.scss",
+    "test": "mocha --config=./.mocharc.json -n import=./mochaloader.js ./src/**/*.test.ts --trace-warnings"
   },
   "engines": {
-    "node": "18.0.0"
+    "npm": "^10.0.0",
+    "node": "^20.0.0"
   },
   "devDependencies": {
-    "sass": "^1.76.0",
-    "typescript": "^5.4.5",
+    "@types/chai": "^4.3.19",
+    "@types/jsdom": "^21.1.7",
+    "@types/mocha": "^10.0.7",
+    "@types/node": "^20.5.4",
+    "@types/sinon": "^17.0.3",
+    "@types/sinon-chai": "^3.2.12",
     "@typescript-eslint/eslint-plugin": "^7.11.0",
     "@typescript-eslint/parser": "^7.11.0",
+    "chai": "^5.1.1",
     "eslint": "^8.56.0",
     "eslint-config-xo": "^0.45.0",
     "eslint-config-xo-typescript": "^4.0.0",
+    "jsdom": "^25.0.0",
+    "mocha": "^10.7.3",
+    "node-esm-loader": "^0.3.0",
+    "npm-run-all": "^4.1.5",
+    "sass": "^1.76.0",
+    "sinon": "^18.0.0",
+    "sinon-chai": "^4.0.0",
     "stylelint": "^16.6.1",
     "stylelint-config-standard": "^36.0.0",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
     "vite": "^5.2.0",
     "vite-plugin-handlebars": "^2.0.0"
   },
