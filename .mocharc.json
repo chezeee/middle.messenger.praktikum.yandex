@@ -1,7 +1,6 @@
 {
-  "$schema": "https://json.schemastore.org/mocharc.json",
-  "extension": ["ts"],
+  "extension": ["ts", "js"],
   "spec": "src/**/*.test.ts",
-  "require": ["ts-node/register", "./mochaSetup.js"],
-  "node-options": ["experimental-specifier-resolution=node"]
+  "require": ["mochaSetup.js"],
+  "loader": ["ts-node/esm"]
 }

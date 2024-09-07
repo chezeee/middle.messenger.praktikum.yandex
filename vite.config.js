@@ -29,5 +29,9 @@ export default defineConfig({
     handlebars({
       partialDirectory: resolve(__dirname, 'src'),
     }),
+    tsconfigPaths({
+      loose: true,
+      root: './',
+    }),
   ],
 });
