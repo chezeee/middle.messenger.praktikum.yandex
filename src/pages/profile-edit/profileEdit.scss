@@ -17,7 +17,7 @@
 .form-data-row {
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #eaeaea;
+  border-top: 1px solid var(--profile-border-top-color);
   width: 510px;
   padding: 10px 0;
 }
@@ -34,7 +34,7 @@
 .form-data-row label {
   font-weight: 500;
   font-size: 16px;
-  color: #1e1e1e;
+  color: var(--profile-data-row-label-color);
   border: 0;
 }
 

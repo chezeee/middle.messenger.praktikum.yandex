@@ -1,9 +1,10 @@
-import Component, { ComponentProps } from '../../services/Component';
+import Component from '../../services/Component';
 import template from './template.hbs?raw';
 import './contentForm.scss';
+import { ComponentWithStoreProps } from '../../services/Store/Connect';
 
 export default class ContentForm extends Component {
-  constructor(props: ComponentProps) {
+  constructor(props: ComponentWithStoreProps) {
     super('section', {
       ...props,
       attr: { class: 'content-form' },

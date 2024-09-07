@@ -1,9 +1,10 @@
-import Component, { ComponentProps } from '../../services/Component';
+import Component from '../../services/Component';
 import template from './template.hbs?raw';
+import { ComponentWithStoreProps } from '../../services/Store/Connect';
 import './chatList.scss';
 
-export default class Chatlist extends Component {
-  constructor(props: ComponentProps) {
+export default class ChatList extends Component {
+  constructor(props: ComponentWithStoreProps) {
     super('div', { ...props, attr: { class: 'chat-list-wrap' } });
   }
 

@@ -1,4 +1,12 @@
-{{#if idActiveChat}}<div class='content-form__header'>{{{userList}}}{{{buttonChatOpts}}}</div>
+{{#if idActiveChat}}<div class='content-form__header'>
+  <div class="user-list-wrap">
+    <div>Пользователи чата:</div>
+    {{{userList}}}
+  </div>
+  <div class="options-wrap">
+    {{{chatOptions}}}
+  </div>
+</div>
 <div class="content-form__main">{{{contentDisplay}}}</div>
 {{{msgSendingForm}}}
 </if>
