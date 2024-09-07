@@ -1,15 +1,10 @@
 {
   "name": "middle.messenger.praktikum.yandex",
   "private": false,
-  "version": "0.0.1",
+  "version": "1.0.0",
   "type": "module",
   "engines": {
     "node": ">=20"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run precommit"
-    }
   },
   "scripts": {
     "start": "npm run build && node server.js",
@@ -22,6 +17,11 @@
     "lint:": "eslint --fix && stylelint src/**/*.scss --fix",
     "precommit": "lint-staged && npm run test",
     "prepare": "husky"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run precommit"
+    }
   },
   "devDependencies": {
     "@types/chai": "4.3.19",
