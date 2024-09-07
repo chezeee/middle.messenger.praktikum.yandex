@@ -4,8 +4,7 @@
   "version": "0.0.1",
   "type": "module",
   "engines": {
-    "npm": "10.0.0",
-    "node": "20.0.0"
+    "node": ">=20"
   },
   "husky": {
     "hooks": {
@@ -21,7 +20,7 @@
     "stylelint": "stylelint src/**/*.scss --fix",
     "test": "mocha --es-module-specifier-resolution=node",
     "lint": "npm run eslint && npm run stylelint",
-    "precommit": "npm run test && lint-staged"
+    "precommit": "npm run test && npm run lint"
   },
   "devDependencies": {
     "@types/chai": "4.3.19",
