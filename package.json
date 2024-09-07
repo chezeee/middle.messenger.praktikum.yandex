@@ -16,7 +16,7 @@
     "test": "mocha --es-module-specifier-resolution=node",
     "lint:": "eslint --fix && stylelint src/**/*.scss --fix",
     "precommit": "lint-staged && npm run test",
-    "prepare": "husky"
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
