@@ -7,6 +7,12 @@
     "npm": "10.0.0",
     "node": "20.0.0"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm-run-all test lint:all",
+      "pre-push": ""
+    }
+  },
   "scripts": {
     "start": "npm run build && node server.js",
     "dev": "vite",
@@ -15,13 +21,8 @@
     "eslint": "eslint . --fix",
     "stylelint": "stylelint src/**/*.scss --fix",
     "test": "mocha --es-module-specifier-resolution=node",
-    "lint": "npm run eslint && npm run stylelint"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
-      "pre-push": ""
-    }
+    "lint": "npm run eslint && npm run stylelint",
+    "prepare": "husky"
   },
   "devDependencies": {
     "@types/chai": "4.3.19",
