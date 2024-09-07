@@ -9,8 +9,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm-run-all test lint:all",
-      "pre-push": ""
+      "pre-commit": "npm run precommit"
     }
   },
   "scripts": {
@@ -22,7 +21,7 @@
     "stylelint": "stylelint src/**/*.scss --fix",
     "test": "mocha --es-module-specifier-resolution=node",
     "lint": "npm run eslint && npm run stylelint",
-    "prepare": "husky"
+    "precommit": "npm run test && lint-staged"
   },
   "devDependencies": {
     "@types/chai": "4.3.19",
