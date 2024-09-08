@@ -56,7 +56,7 @@
 
 ## **Установка и использование проекта локально**
 
-`git clone https://github.com/chezeee/middle.messenger.prakticum.yandex.git` - клонирование проекта в локальный репозиторий;
+`git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git` - клонирование проекта в локальный репозиторий;
 
 `npm i` — установка зависимостей;
 
@@ -64,7 +64,7 @@
 
 `npm run build` — сборка стабильной версии.
 
-`npm run lint` - запускают проверки eslint и stylelint
+`npm run lint` - запускает проверки eslint и stylelint
 
 `npm run test` - запускает тесты
 
