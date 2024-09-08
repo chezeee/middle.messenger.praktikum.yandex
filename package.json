@@ -9,7 +9,8 @@
   "scripts": {
     "start": "npm run build && node server.js",
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
+    "prebuild": "tsc --noEmit",
+    "build": "npm run prebuild && vite build --emptyOutDir",
     "preview": "vite preview",
     "eslint": "eslint . --fix",
     "stylelint": "stylelint src/**/*.scss --fix",

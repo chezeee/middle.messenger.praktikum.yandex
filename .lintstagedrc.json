@@ -1,4 +1,4 @@
 {
-  "*.{js,ts,jsx,tsx}": ["eslint --fix", "tsc --noEmit", "git add"],
+  "*.{js,ts,jsx,tsx}": ["eslint --fix", "git add"],
   "*.scss": ["stylelint --fix", "git add"]
 }
