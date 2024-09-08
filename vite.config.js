@@ -5,7 +5,6 @@ import { defineConfig } from 'vite';
 import handlebars from 'vite-plugin-handlebars';
 
 export default defineConfig({
-  // assetsInclude: ['**/*.hbs'],
   root: resolve(__dirname, 'src'),
   publicDir: resolve(__dirname, './public'),
   build: {
@@ -30,4 +29,10 @@ export default defineConfig({
       partialDirectory: resolve(__dirname, 'src'),
     }),
   ],
+  server: {
+    port: 3000,
+  },
+  preview: {
+    port: 3000,
+  },
 });

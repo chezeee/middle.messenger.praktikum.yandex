@@ -42,9 +42,12 @@ function queryString(data: unknown) {
     throw new Error('input must be an object');
   }
 
-  return getParams(data)
-    .map((arr) => arr.join('='))
-    .join('&');
+  return (
+    '?' +
+    getParams(data)
+      .map((arr) => arr.join('='))
+      .join('&')
+  );
 }
 
 export default queryString;
