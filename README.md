@@ -1,27 +1,35 @@
-[(https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/25)](https://github.com/chezeee/middle.messenger.praktikum.yandex/pull/25)
-
-# Веб-мессенджер
+# Web-messenger
 
 ## Описание
 
-Данное веб-приложение представляет из себя SPA для удобного обмена сообщенями с другими пользователями по протоколу WebSocket.
+Данный проект представляет из себя SPA для обмена сообщенями с другими пользователями по протоколу WebSocket.
+
+Проект основан на реактивных компонентах с реализацией классов базового компонента, EventBus, Store (хранилища данных), Router, передачи данных по HTTP и WebSocket.
+
+В данной версии настроены тесты с использованием Mocha, Chai и Sinon для роутера, базового компонента, модуля отправки запросов.
+
+Проект развернут на хостинге Netlify.
 
 ## Версия
 
-Версия веб-приложения: **_0.0.1_**
-
-**Проект находится в разработке**
+Версия веб-приложения: **_1.0.0_**
 
 ## Технологии, используемые в процессе; разработки:
 
-- TypeScript
-- Vite
-- Handlebars
-- SCSS
-- Express
-- Netlify
-- ESLint
-- StyleLint
+- **TypeScript**
+- **Vite**
+- **Handlebars**
+- **SCSS**
+- **HTTP**
+- **WebSocket**
+- **Express**
+- **Netlify**
+- **ESLint**
+- **StyleLint**
+- **Mocha**
+- **Chai**
+- **Sinon**
+- **Husky**
 
 ## Дизайн
 
@@ -31,7 +39,7 @@
 
 ## **Развертывание приложения из GitHub на хостинге Netlify**
 
-**Веб-приложение доступно для ознакомления по следующей ссылке:**
+**Проект доступен для ознакомления по следующей ссылке:**
 
 <https://yp-messenger.netlify.app>
 
@@ -48,13 +56,19 @@
 
 ## **Установка и использование проекта локально**
 
-`git clone https://github.com/chezeee/middle.messenger.praktikum.yandex.git` - клонирование проекта в локальный репозиторий;
+`git clone https://github.com/chezeee/middle.messenger.prakticum.yandex.git` - клонирование проекта в локальный репозиторий;
 
-`npm install` — установка зависимостей;
+`npm i` — установка зависимостей;
+
+`npm run dev` — сборка и запуск на 3000 порту версии для разработчика;
 
 `npm run build` — сборка стабильной версии.
 
-`npm run start` — сборка и запуск на 3000 порту версии для разработчика;
+`npm run lint` - запускают проверки eslint и stylelint
+
+`npm run test` - запускает тесты
+
+Также в проекте настроен и используется хук **precommit** (Husky), который выполняется перед `git commit` и запускает **lint-staged** и **test**.
 
 ### **URL страниц для просмотра в режиме разработки**
 

@@ -28,10 +28,6 @@ export default defineConfig({
     handlebars({
       partialDirectory: resolve(__dirname, 'src'),
     }),
-    // tsconfigPaths({
-    //   loose: true,
-    //   root: './',
-    // }),
   ],
   server: {
     port: 3000,
