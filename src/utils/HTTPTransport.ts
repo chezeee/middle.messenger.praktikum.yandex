@@ -1,4 +1,4 @@
-import queryStringify from '../helpers/queryStringify';
+import queryString from '../helpers/queryStringify';
 
 enum METHODS {
   GET = 'GET',
@@ -28,7 +28,8 @@ export default class HTTPTransport {
   }
 
   get: MethodsHTML = (url, options = {}, timeout) => {
-    return this.request(url, { ...options, method: METHODS.GET }, timeout);
+    const fullUrl = options.data ? url + queryString(options.data) : url;
+    return this.request(fullUrl, { ...options, method: METHODS.GET }, timeout);
   };
   put: MethodsHTML = (url, options = {}, timeout) => {
     return this.request(url, { ...options, method: METHODS.PUT }, timeout);
@@ -52,12 +53,7 @@ export default class HTTPTransport {
       const fullUrl = this.baseUrl + url;
       const xhr = new XMLHttpRequest();
 
-      xhr.open(
-        method,
-        method === METHODS.GET && !!data
-          ? `${fullUrl}${queryStringify(data)}`
-          : fullUrl
-      );
+      xhr.open(method, fullUrl);
 
       Object.keys(headers).forEach((key) => {
         xhr.setRequestHeader(key, headers[key]);
